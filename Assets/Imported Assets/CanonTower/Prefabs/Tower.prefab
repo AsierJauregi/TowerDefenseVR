@@ -116,7 +116,7 @@ Transform:
   - {fileID: 482722}
   - {fileID: 473270}
   m_Father: {fileID: 471166}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &9554040
 Animator:
@@ -250,8 +250,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 476426}
   - {fileID: 450448}
+  - {fileID: 476426}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -536,7 +536,7 @@ Transform:
   - {fileID: 463400}
   - {fileID: 449956}
   m_Father: {fileID: 471166}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &9524064
 Animator:

@@ -6,6 +6,7 @@ public class TurretDefender : MonoBehaviour
 {
     public bool isTargetOnRadius = false;
     public Transform aimedEnemy;
+
     [SerializeField]
     private string targetTag = "Enemy";
     private Transform turretCanon;
@@ -21,24 +22,21 @@ public class TurretDefender : MonoBehaviour
     }
     void Awake()
     {
-        Transform turretCanon = this.gameObject.transform.GetChild(0);
-        turretCanon.position = turretCanon.position;
+        turretCanon = this.gameObject.transform.GetChild(0);
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         AimAtEnemy();
     }
     void AimAtEnemy()
     {
-        
-        
         if (isTargetOnRadius && aimedEnemy != null)
         {
-            float enemyDistance = Mathf.Abs(Vector3.Distance(this.transform.position, aimedEnemy.position));
-            
+            Vector3 enemyDirection = aimedEnemy.position - turretCanon.position;
+            float enemyDistance = enemyDirection.magnitude;
 
-            Debug.DrawRay(turretCanon.position, turretCanon.TransformDirection(aimedEnemy.position) * enemyDistance, Color.red);
+            Debug.DrawRay(turretCanon.position, enemyDirection * enemyDistance, Color.red);
             Debug.Log("Tower is aiming at enemy");
         }
         else
@@ -46,7 +44,7 @@ public class TurretDefender : MonoBehaviour
             Debug.DrawRay(turretCanon.position, turretCanon.TransformDirection(Vector3.forward) * 100, Color.red);
         }
     }
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == targetTag)
         {
@@ -54,7 +52,11 @@ public class TurretDefender : MonoBehaviour
             aimedEnemy = other.transform;
         }
     }
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerStay(Collider other)
+    {
+        
+    }
+    void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == targetTag)
         {
