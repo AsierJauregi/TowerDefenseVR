@@ -7,7 +7,8 @@ public class TurretDefender : MonoBehaviour
     public bool isTargetOnRadius = false;
     public Transform aimedEnemy;
     public GameObject canonBall;
-    [SerializeField] public float shootingForce = 40;
+    public float shootingForce = 40;
+    public float firePower = 25;
     public float cooldownTime = 2;
     private float nextFireTime = 0;
     [SerializeField] private string targetTag = "Enemy";
@@ -39,7 +40,6 @@ public class TurretDefender : MonoBehaviour
             float enemyDistance = enemyDirection.magnitude;
 
             Debug.DrawRay(turretCanon.position, enemyDirection * enemyDistance, Color.red);
-            Debug.Log("Tower is aiming at enemy");
             ShootTarget(enemyDirection);
         }
         else
@@ -52,13 +52,10 @@ public class TurretDefender : MonoBehaviour
         if (Time.time > nextFireTime)
         {
             GameObject newCanonBall = Instantiate(canonBall);
+            newCanonBall.GetComponent<CanonBallCollision>().power = firePower;
             newCanonBall.transform.position = turretCanon.position + turretCanon.transform.forward * 1.5f;
             newCanonBall.GetComponent<Rigidbody>().AddForce(direction * shootingForce);
             nextFireTime = Time.time + cooldownTime;
-        }
-        else
-        {
-
         }
     }
     void OnTriggerEnter(Collider other)
