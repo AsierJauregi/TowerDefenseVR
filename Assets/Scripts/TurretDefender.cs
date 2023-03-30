@@ -14,15 +14,6 @@ public class TurretDefender : MonoBehaviour
     [SerializeField] private string targetTag = "Enemy";
     private Transform turretCanon;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
     void Awake()
     {
         turretCanon = this.gameObject.transform.GetChild(0);
