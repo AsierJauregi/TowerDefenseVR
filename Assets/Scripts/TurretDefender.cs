@@ -4,30 +4,28 @@ using UnityEngine;
 
 public class TurretDefender : MonoBehaviour
 {
-    public bool isTargetOnRadius = false;
-    public Transform aimedEnemy;
-    public GameObject canonBall;
-    public float shootingForce = 40;
-    public float firePower = 25;
-    public float cooldownTime = 2;
+    private List<GameObject> aimedEnemies;
+    [SerializeField] private GameObject canonBall;
+    [SerializeField] private float shootingForce = 40;
+    [SerializeField] private float firePower = 25;
+    [SerializeField] private float cooldownTime = 2;
     private float nextFireTime = 0;
-    [SerializeField] private string targetTag = "Enemy";
+    [SerializeField] private string preferredTargetTag = "FastEnemy";
+    private string[] allTargetTag = {"Enemy", "Slow", "FastEnemy" };
     private Transform turretCanon;
 
     void Awake()
     {
         turretCanon = this.gameObject.transform.GetChild(0);
+        aimedEnemies = new List<GameObject>();
     }
 
-    void FixedUpdate()
+    void AimAtEnemy(GameObject aimedEnemy)
     {
-        AimAtEnemy();
-    }
-    void AimAtEnemy()
-    {
-        if (isTargetOnRadius && aimedEnemy != null)
+        if (aimedEnemies.Count > 0)
         {
-            Vector3 enemyDirection = aimedEnemy.position - turretCanon.position;
+            Vector3 enemyPosition = aimedEnemy.transform.position;
+            Vector3 enemyDirection = enemyPosition - turretCanon.position;
             float enemyDistance = enemyDirection.magnitude;
 
             Debug.DrawRay(turretCanon.position, enemyDirection * enemyDistance, Color.red);
@@ -37,7 +35,8 @@ public class TurretDefender : MonoBehaviour
         {
             Debug.DrawRay(turretCanon.position, turretCanon.TransformDirection(Vector3.forward) * 100, Color.red);
         }
-    }  
+    }
+
     void ShootTarget(Vector3 direction)
     {
         if (Time.time > nextFireTime)
@@ -51,21 +50,45 @@ public class TurretDefender : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == targetTag)
-        {
-            isTargetOnRadius = true;
-            aimedEnemy = other.transform;
+        foreach (string tag in allTargetTag) {
+            if (other.gameObject.tag == tag)
+            {
+                aimedEnemies.Add(other.gameObject);
+            }
         }
     }
     
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == targetTag)
+        foreach (string tag in allTargetTag)
         {
-            isTargetOnRadius = false;
-            aimedEnemy = null;
+            if (other.gameObject.tag == tag)
+            {
+                aimedEnemies.Remove(other.gameObject);
+            }
         }
     }
+    private void OnTriggerStay(Collider other)
+    {
+        if (aimedEnemies.Count > 1)
+        {
+            AimAtEnemy(PreferredTarget());
+        }
+        else if (aimedEnemies.Count == 1)
+        {
+            AimAtEnemy(other.gameObject);
+        }
+    }
+    GameObject PreferredTarget()
+    {
+        if (aimedEnemies.Count > 1)
+        {
+            foreach (GameObject enemy in aimedEnemies)
+            {
+                if (enemy.tag == preferredTargetTag) return enemy;
+            }
+        }
+        return null;
+    }
 
-  
 }

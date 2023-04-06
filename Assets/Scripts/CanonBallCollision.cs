@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CanonBallCollision : MonoBehaviour
 {
-    public float power = 25;
+    public float power;
     // Start is called before the first frame update
 
     void OnTriggerStay(Collider other)
@@ -19,8 +19,8 @@ public class CanonBallCollision : MonoBehaviour
 
     void Damage(Collider enemy)
     {
-        Debug.Log("Enemy health: " + enemy.GetComponent<EnemyHealth>().health);
-        enemy.GetComponent<EnemyHealth>().ReceiveDamage(power);
-        Debug.Log("Enemy health: " + enemy.GetComponent<EnemyHealth>().health);
+        Debug.Log("Enemy health: " + enemy.GetComponent<Enemy>().health);
+        enemy.GetComponent<Enemy>().ReceiveDamage(power);
+        Debug.Log("Enemy health: " + enemy.GetComponent<Enemy>().health);
     }
 }
