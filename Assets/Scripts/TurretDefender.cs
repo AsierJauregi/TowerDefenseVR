@@ -29,7 +29,7 @@ public class TurretDefender : MonoBehaviour
             float enemyDistance = enemyDirection.magnitude;
 
             Debug.DrawRay(turretCanon.position, enemyDirection * enemyDistance, Color.red);
-            ShootTarget(enemyDirection);
+            ShootTarget(enemyDirection, aimedEnemy);
         }
         else
         {
@@ -37,12 +37,13 @@ public class TurretDefender : MonoBehaviour
         }
     }
 
-    void ShootTarget(Vector3 direction)
+    void ShootTarget(Vector3 direction, GameObject target)
     {
         if (Time.time > nextFireTime)
         {
             GameObject newCanonBall = Instantiate(canonBall);
             newCanonBall.GetComponent<CanonBallCollision>().power = firePower;
+            newCanonBall.GetComponent<CanonBallCollision>().target = target;
             newCanonBall.transform.position = turretCanon.position + turretCanon.transform.forward * 1.5f;
             newCanonBall.GetComponent<Rigidbody>().AddForce(direction * shootingForce);
             nextFireTime = Time.time + cooldownTime;
@@ -85,7 +86,11 @@ public class TurretDefender : MonoBehaviour
         {
             foreach (GameObject enemy in aimedEnemies)
             {
-                if (enemy.tag == preferredTargetTag) return enemy;
+                if (enemy.tag == preferredTargetTag) 
+                {
+                    Debug.Log("Target changed to " + enemy.name);
+                    return enemy; 
+                }
             }
         }
         return null;
