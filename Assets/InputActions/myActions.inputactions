@@ -1,0 +1,146 @@
+{
+    "name": "myActions",
+    "maps": [
+        {
+            "name": "Test",
+            "id": "1ec7d260-b1f0-4234-a85b-351eef7d01b9",
+            "actions": [
+                {
+                    "name": "Message",
+                    "type": "Button",
+                    "id": "cadef553-ff38-4b4b-bdbe-4360dcb47366",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "75429a95-3250-469c-adb0-28c8b8d3f28e",
+                    "path": "<XRController>{RightHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "VR",
+                    "action": "Message",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3d4f9dbb-a24d-4cf9-a248-8a440a08d6db",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Teclado",
+                    "action": "Message",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Build Tower",
+            "id": "b9ca69fb-0b39-402a-ae51-8633ce1f4a30",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "3901976e-8e9e-4d38-a021-709e5b847e0c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "0c40787c-78aa-4c33-a9bf-09350b8c3b76",
+                    "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Teclado",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c5ead2f9-a4d2-4564-8938-f763cc0a567e",
+                    "path": "<XRController>{LeftHand}/secondaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "VR",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Let Build",
+            "id": "f6cf2b5a-6b05-4798-8d51-9f4ebdba4b49",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "fd837d09-4044-411e-bbfa-e363c8c14ad8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "6961e291-d05e-4070-93c3-54079cbb4755",
+                    "path": "<Keyboard>/l",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Teclado",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "12427c3c-4ef7-4cef-bf90-dc822f33c42d",
+                    "path": "<XRController>{LeftHand}/primaryTouched",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "VR",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "Teclado",
+            "bindingGroup": "Teclado",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "VR",
+            "bindingGroup": "VR",
+            "devices": [
+                {
+                    "devicePath": "<XRController>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}

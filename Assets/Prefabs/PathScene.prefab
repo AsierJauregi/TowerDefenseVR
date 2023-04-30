@@ -45,6 +45,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ForestGroundDirt
       objectReference: {fileID: 0}
+    - target: {fileID: 1641819918252310, guid: 13f1670c2e187874784d0f667f9057f5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4838866880481952, guid: 13f1670c2e187874784d0f667f9057f5, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -119,6 +123,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ForestGround02
       objectReference: {fileID: 0}
+    - target: {fileID: 1560257132984952, guid: 5cbae0602ce9acf41a98fda3a353569a, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4310614304489658, guid: 5cbae0602ce9acf41a98fda3a353569a, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -192,6 +200,10 @@ PrefabInstance:
     - target: {fileID: 1560257132984952, guid: 5cbae0602ce9acf41a98fda3a353569a, type: 3}
       propertyPath: m_Name
       value: ForestGround02 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1560257132984952, guid: 5cbae0602ce9acf41a98fda3a353569a, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4310614304489658, guid: 5cbae0602ce9acf41a98fda3a353569a, type: 3}
       propertyPath: m_RootOrder

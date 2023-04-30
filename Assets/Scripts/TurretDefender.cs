@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TurretDefender : MonoBehaviour
 {
-    private List<GameObject> aimedEnemies;
+    public List<GameObject> aimedEnemies;
     [SerializeField] private GameObject canonBall;
     [SerializeField] private float shootingForce = 40;
     [SerializeField] private float firePower = 25;
@@ -13,16 +13,23 @@ public class TurretDefender : MonoBehaviour
     [SerializeField] private string preferredTargetTag = "FastEnemy";
     private string[] allTargetTag = {"Enemy", "Slow", "FastEnemy" };
     private Transform turretCanon;
+    private Transform towerCanvas;
+    [SerializeField] public Camera mainCamera;
 
     void Awake()
     {
         turretCanon = this.gameObject.transform.GetChild(0);
         aimedEnemies = new List<GameObject>();
+        towerCanvas = this.gameObject.transform.GetChild(2);
     }
 
+    private void Update()
+    {
+        towerCanvas.LookAt(mainCamera.transform);
+    }
     void AimAtEnemy(GameObject aimedEnemy)
     {
-        if (aimedEnemies.Count > 0)
+        if (aimedEnemies.Count > 0 && aimedEnemy != null)
         {
             Vector3 enemyPosition = aimedEnemy.transform.position;
             Vector3 enemyDirection = enemyPosition - turretCanon.position;
@@ -51,10 +58,13 @@ public class TurretDefender : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        foreach (string tag in allTargetTag) {
-            if (other.gameObject.tag == tag)
-            {
-                aimedEnemies.Add(other.gameObject);
+        if (other.gameObject.tag != "Tower")
+        {
+            foreach (string tag in allTargetTag) {
+                if (other.gameObject.tag == tag)
+                {
+                    aimedEnemies.Add(other.gameObject);
+                }
             }
         }
     }
@@ -71,13 +81,16 @@ public class TurretDefender : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if (aimedEnemies.Count > 1)
+        if (other.gameObject.tag != "Tower")
         {
-            AimAtEnemy(PreferredTarget());
-        }
-        else if (aimedEnemies.Count == 1)
-        {
-            AimAtEnemy(other.gameObject);
+            if (aimedEnemies.Count > 1)
+            {
+                AimAtEnemy(PreferredTarget());
+            }
+            else if (aimedEnemies.Count == 1)
+            {
+                AimAtEnemy(other.gameObject);
+            }
         }
     }
     GameObject PreferredTarget()
@@ -86,9 +99,8 @@ public class TurretDefender : MonoBehaviour
         {
             foreach (GameObject enemy in aimedEnemies)
             {
-                if (enemy.tag == preferredTargetTag) 
+                if (enemy.tag == preferredTargetTag && enemy != null) 
                 {
-                    Debug.Log("Target changed to " + enemy.name);
                     return enemy; 
                 }
             }
