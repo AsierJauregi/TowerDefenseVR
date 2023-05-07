@@ -1285,6 +1285,7 @@ GameObject:
   - component: {fileID: 6724211740455961362}
   - component: {fileID: 6724211740455961360}
   - component: {fileID: 6724211740455961373}
+  - component: {fileID: 5094679427780799910}
   m_Layer: 0
   m_Name: Boximon Fiery
   m_TagString: Enemy
@@ -1383,7 +1384,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dba836809f56b0847af5d56f03783743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 3
+  waypoints: []
+  moveSpeed: 2.5
+  positionOffset: {x: 0.25, y: 0.25, z: 0.25}
 --- !u!114 &6724211740455961373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1398,8 +1401,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   maxHealth: 100
+  damage: 10
+  cooldown: 1.5
+  coins: 10
   healthBarUI: {fileID: 6724211742095066609}
   slider: {fileID: 6724211741879119050}
+  cityHall: {fileID: 0}
+--- !u!1183024399 &5094679427780799910
+LookAtConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6725623147098101928}
+  m_Enabled: 1
+  m_Weight: 1
+  m_RotationAtRest: {x: 0, y: 0, z: 0}
+  m_RotationOffset: {x: 0, y: 0, z: 0}
+  m_Roll: 0
+  m_WorldUpObject: {fileID: 0}
+  m_UseUpObject: 0
+  m_IsContraintActive: 1
+  m_IsLocked: 0
+  m_Sources: []
 --- !u!1 &6725865588362331114
 GameObject:
   m_ObjectHideFlags: 0

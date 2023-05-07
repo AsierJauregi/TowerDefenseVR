@@ -9,6 +9,7 @@ TagManager:
   - FastEnemy
   - SlowEnemy
   - Waypoint
+  - TowerCollision
   layers:
   - Default
   - TransparentFX

@@ -66,6 +66,7 @@ MonoBehaviour:
   shootingForce: 250
   firePower: 25
   cooldownTime: 0.5
+  rotationSpeed: 10
   preferredTargetTag: FastEnemy
   mainCamera: {fileID: 0}
 --- !u!1 &8332975166290535855
@@ -263,7 +264,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8332975166566353653
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1158,7 +1159,7 @@ GameObject:
   - component: {fileID: 1104904785}
   m_Layer: 6
   m_Name: Tower_Base
-  m_TagString: Tower
+  m_TagString: TowerCollision
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
