@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class FollowThePath : MonoBehaviour
 {
+    
 
     // Array of waypoints to walk from one to the next one
     [SerializeField]
@@ -14,11 +15,21 @@ public class FollowThePath : MonoBehaviour
     // Index of current waypoint from which Enemy walks
     // to the next one
     private int waypointIndex = 0;
+    
+    private const float positionOffset = 0.5f;
 
-    // Update is called once per frame
+    private bool isEndReached = false;
+
     private void FixedUpdate()
     {
-        Move();
+        if (!isEndReached)
+        {
+            Move();
+        }
+        else
+        {
+            this.gameObject.GetComponent<Enemy>().IsOnRange();
+        }
     }
 
     // Method that actually make Enemy walk
@@ -28,6 +39,13 @@ public class FollowThePath : MonoBehaviour
         // If enemy reached last waypoint then it stops
         if (waypointIndex <= waypoints.Length - 1)
         {
+            //Get the direction towards the waypoint to look at that direction
+            Vector3 direction = (waypoints[waypointIndex].transform.position - transform.position).normalized;
+
+            //Change the orientation of the enemy
+            transform.LookAt(transform.position + direction);
+            transform.rotation = Quaternion.Euler(new Vector3(0, transform.rotation.eulerAngles.y, 0));
+
 
             // Move Enemy from current waypoint to the next one
             // using MoveTowards method
@@ -38,10 +56,20 @@ public class FollowThePath : MonoBehaviour
             // If Enemy reaches position of waypoint he walked towards
             // then waypointIndex is increased by 1
             // and Enemy starts to walk to the next waypoint
-            if (transform.position == waypoints[waypointIndex].transform.position)
+            if (Vector3.Distance(transform.position, waypoints[waypointIndex].transform.position) < positionOffset)
             {
-                waypointIndex += 1;
+                waypointIndex++;
             }
+
         }
+        else
+        {
+            isEndReached = true;
+        }
+    }
+
+    public void GetWaypointList(Transform[] waypointList)
+    {
+        waypoints = waypointList;
     }
 }
