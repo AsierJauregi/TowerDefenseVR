@@ -1385,8 +1385,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypoints: []
-  moveSpeed: 2.5
-  positionOffset: {x: 0.25, y: 0.25, z: 0.25}
+  moveSpeed: 3
 --- !u!114 &6724211740455961373
 MonoBehaviour:
   m_ObjectHideFlags: 0

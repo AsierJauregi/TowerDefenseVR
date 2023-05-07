@@ -59,7 +59,6 @@ public class GameLogic : MonoBehaviour
         }
         else
         {
-
             turnPhase = TurnPhase.Building;
             Debug.Log("Building Turn");
             turnNumber++; 

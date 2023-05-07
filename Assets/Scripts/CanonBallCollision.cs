@@ -20,12 +20,10 @@ public class CanonBallCollision : MonoBehaviour
 
     void Damage(GameObject enemy)
     {
-        //Debug.Log("Enemy health: " + enemy.GetComponent<Enemy>().health);
         bool isEnemyDead = enemy.GetComponent<Enemy>().ReceiveDamage(power);
         if (isEnemyDead && enemy != null)
         {
             originTurret.GetComponent<TurretDefender>().KillEnemy(enemy);
         }
-        //Debug.Log("Enemy health: " + enemy.GetComponent<Enemy>().health);
     }
 }

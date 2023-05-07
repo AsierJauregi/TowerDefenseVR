@@ -2,11 +2,11 @@
     "name": "myActions",
     "maps": [
         {
-            "name": "Test",
+            "name": "Menu Activation",
             "id": "1ec7d260-b1f0-4234-a85b-351eef7d01b9",
             "actions": [
                 {
-                    "name": "Message",
+                    "name": "Actiavate Radial Menu",
                     "type": "Button",
                     "id": "cadef553-ff38-4b4b-bdbe-4360dcb47366",
                     "expectedControlType": "Button",
@@ -23,18 +23,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "VR",
-                    "action": "Message",
+                    "action": "Actiavate Radial Menu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "3d4f9dbb-a24d-4cf9-a248-8a440a08d6db",
-                    "path": "<Keyboard>/space",
+                    "path": "<Keyboard>/m",
                     "interactions": "",
                     "processors": "",
                     "groups": "Teclado",
-                    "action": "Message",
+                    "action": "Actiavate Radial Menu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -154,6 +154,172 @@
                     "action": "New action",
                     "isComposite": false,
                     "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Vertical Radial Menu Selection",
+            "id": "8636a57b-2327-45d2-93e9-6ce9d6861f0c",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "1539c157-9244-4e6e-93e0-be3389422cea",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "1D Axis",
+                    "id": "e213e125-c07b-44e0-b2a5-998451026989",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "dbade9fa-a77b-48ff-9275-9d9e8febc9f1",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "4d917033-5640-4708-b22c-aa320ece74f1",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "ef0c99f8-beb8-46d3-ba13-7eb3e489ddfc",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "aaaa88f9-0be1-4b8f-a1d2-b0d34133ac64",
+                    "path": "<Gamepad>/leftStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "cb56cb0d-9382-4a59-9516-c8529d608ff1",
+                    "path": "<Gamepad>/leftStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        },
+        {
+            "name": "Horizontal Radial Menu Selection",
+            "id": "5ebc6e3d-a3ab-43ab-b6a9-7ae0d1979e76",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "761c394d-15c9-45f3-97aa-54f491b5a297",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "1D Axis",
+                    "id": "efb38706-fa8a-41dd-ae2e-fbcb26251ce4",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "d3bb7a00-bb08-46fa-8ca2-397b3337d978",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "13ecc991-94d0-43bd-9503-a26adda099b0",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "11eaf4c4-a45e-4ac4-91ff-fdf83d264307",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "f68c0110-e9fc-4eb7-b5ff-021737e1502c",
+                    "path": "<Gamepad>/leftStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "79391443-1d63-4d1d-9788-fff70def6ddd",
+                    "path": "<Gamepad>/leftStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }

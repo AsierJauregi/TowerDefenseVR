@@ -62,6 +62,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aimedEnemies: []
+  aimedEnemy: {fileID: 0}
   canonBall: {fileID: 8544242848317257919, guid: fec61954e6aa16d4994588ffd344ba8c, type: 3}
   shootingForce: 250
   firePower: 25
@@ -264,7 +265,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8332975166566353653
 RectTransform:
   m_ObjectHideFlags: 0

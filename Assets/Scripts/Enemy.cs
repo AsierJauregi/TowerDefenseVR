@@ -65,7 +65,6 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator Attack()
     {
-        Debug.Log(this.gameObject.name + " is attacking the CityHall!!");
         animator.SetTrigger("Attack 01");
         yield return new WaitForSeconds(0.3f);
         cityHall.GetComponent<CityHall>().ReceiveDamage(damage);
@@ -97,7 +96,6 @@ public class Enemy : MonoBehaviour
         GameObject[] turrets = GameObject.FindGameObjectsWithTag("Tower");
         foreach(GameObject turret in turrets)
         {
-            Debug.Log(turret.name);
             turret.GetComponent<TurretDefender>().RemoveDeadEnemy(this.gameObject);
         }
         

@@ -5,46 +5,64 @@ using UnityEngine.InputSystem;
 
 public class ExampleInputSystemScript : MonoBehaviour
 {
-    [SerializeField] private const int buildingCost = 30;
+    
     [SerializeField] InputActionAsset myActions;
-    [SerializeField] InputActionReference actionReference;
+    
+    [Header ("Actions")]
     [SerializeField] InputActionReference buildReference;
     [SerializeField] InputActionReference letBuildReference;
     [SerializeField] InputActionReference endBuildingReference;
-    [SerializeField] GameObject canvas;
+    [SerializeField] InputActionReference menuSelectionVerticalReference;
+    [SerializeField] InputActionReference menuSelectionHorizontalReference;
+
+    [Header ("Controllers")]
     [SerializeField] GameObject leftController;
     [SerializeField] GameObject rightController;
+
+    [SerializeField] GameObject radialMenu;
     private GameLogic gameInstance;
+    private Vector2 menuSelectionDirection;
+    [SerializeField] private const int buildingCost = 30;
     bool isBuilding = false;
-    bool on;
+    bool radialMenuOn;
 
     private void Awake()
     {
+        radialMenuOn = false;
+        radialMenu.SetActive(false);
+        
 
-        on = false;
-        myActions.Enable();
-        actionReference.action.performed += Action_performed;
         buildReference.action.performed += Build_performed;
         letBuildReference.action.performed += Let_Build;
         endBuildingReference.action.performed += BuildingTurnEnded;
-        
     }
 
-    private void Action_performed(InputAction.CallbackContext obj)
+    private void Update()
     {
-        
-        if (!on) { 
-            Debug.Log("Canvas activated");
-            canvas.SetActive(true);
-            on = true;
-        }
-        if (on)
+        if (isBuilding)
         {
-            Debug.Log("Canvas desactivated");
-            canvas.SetActive(false);
-            on = false;
+            float verticalJoystickInput = menuSelectionVerticalReference.action.ReadValue<float>();
+            float horizontalJoystickInput = menuSelectionHorizontalReference.action.ReadValue<float>();
+            menuSelectionDirection.Set(horizontalJoystickInput, verticalJoystickInput);
+            Debug.Log(menuSelectionDirection);
+            radialMenu.GetComponent<RadialMenu>().TouchPosition = menuSelectionDirection; 
         }
     }
+
+    private void OnEnable()
+    {
+        myActions.Enable();
+        menuSelectionVerticalReference.action.Enable();
+        menuSelectionHorizontalReference.action.Enable();
+    }
+
+    private void OnDisable()
+    {
+        menuSelectionVerticalReference.action.Disable();
+        menuSelectionHorizontalReference.action.Disable();
+        myActions.Disable();
+    }
+
     private void Build_performed(InputAction.CallbackContext obj)
     {
         if (isBuilding)
@@ -67,12 +85,14 @@ public class ExampleInputSystemScript : MonoBehaviour
         {
             Debug.Log("Building");
             isBuilding = true;
+            radialMenu.SetActive(true);
             leftController.GetComponent<TowerBuilder>().enabled = true;
         }
         else
         {
             Debug.Log("Not building");
             isBuilding = false;
+            radialMenu.SetActive(false);
             leftController.GetComponent<TowerBuilder>().StopPrevisualization();
             leftController.GetComponent<TowerBuilder>().enabled = false;
         }
