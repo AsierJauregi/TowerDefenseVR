@@ -117,6 +117,45 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "PassTurn",
+            "id": "4fd3a5f3-84c8-4243-9eed-3c3ae8db3ec4",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "578cc7e4-c367-4e0c-80aa-8fea952cbdbe",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a112e753-b4cb-45bd-a3cf-556b8411a91a",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "67068dbb-8df3-4b2f-b3e6-a3717ae91b12",
+                    "path": "<XRController>{RightHand}/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
