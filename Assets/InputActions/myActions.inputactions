@@ -108,7 +108,7 @@
                 {
                     "name": "",
                     "id": "12427c3c-4ef7-4cef-bf90-dc822f33c42d",
-                    "path": "<XRController>{LeftHand}/primaryTouched",
+                    "path": "<XRController>{LeftHand}/primaryButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "VR",
@@ -147,7 +147,7 @@
                 {
                     "name": "",
                     "id": "67068dbb-8df3-4b2f-b3e6-a3717ae91b12",
-                    "path": "<XRController>{RightHand}/start",
+                    "path": "<XRController>{RightHand}/secondaryButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -163,12 +163,12 @@
             "actions": [
                 {
                     "name": "New action",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "1539c157-9244-4e6e-93e0-be3389422cea",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -231,6 +231,39 @@
                     "name": "positive",
                     "id": "cb56cb0d-9382-4a59-9516-c8529d608ff1",
                     "path": "<Gamepad>/leftStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "5f08039d-0980-47a4-ab0f-37d0cc58bb73",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "6455ff24-4969-44a0-aae0-7550239dbbb4",
+                    "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/stick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "3cf458b3-855b-46c6-ad00-550d0aa1dee4",
+                    "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/stick/up",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -314,6 +347,39 @@
                     "name": "positive",
                     "id": "79391443-1d63-4d1d-9788-fff70def6ddd",
                     "path": "<Gamepad>/leftStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "db6aa8aa-321d-4348-9305-5ac1c8993ab4",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "2570d5ca-c9d3-4b2a-9937-091838dc7698",
+                    "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/stick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "76aa922a-24ea-4c47-9c7b-af8bec2c57cc",
+                    "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/stick/left",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
