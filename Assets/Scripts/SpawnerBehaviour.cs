@@ -5,12 +5,13 @@ using UnityEngine;
 
 public class SpawnerBehaviour : MonoBehaviour
 {
+    private const float groundSurfaceY = 0.856959f;
     private float firstWaveEnemyDistribution = 6;
     private float secondWaveEnemyDistribution = 3;
     [SerializeField] private GameObject normalEnemyPrefab;
     [SerializeField] private Vector3 spawnOffset;
     [SerializeField] private GameObject cityHall;
-    [SerializeField] private Transform[] waypoints;
+    private Transform[] waypoints;
     [SerializeField] private float cooldownTime;
 
     private int remainningSpawns;
@@ -18,13 +19,20 @@ public class SpawnerBehaviour : MonoBehaviour
     private int enemyWaveQuantity = 3;
     [SerializeField] private int currentEnemyWave = 1;
     [SerializeField] private List<GameObject> aliveEnemies;
+    [SerializeField] private GameObject fireballBonusPrefab;
+    [SerializeField] private String groundTag = "Ground";
+    [SerializeField] private float boundsOffset = 1.5f;
+    private bool isBonusAlive = false;
+
     private GameLogic game;
 
     private void Awake()
     {
         aliveEnemies = new List<GameObject>();
         remainningSpawns = totalEnemySpawns;
+        
         GameObject waypointList = GameObject.FindGameObjectWithTag("Waypoint");
+        waypoints = new Transform[waypointList.transform.childCount];
         for (int i = 0; i < waypointList.transform.childCount; i++)
         {
             Array.Resize(ref waypoints, waypoints.Length + 1);
@@ -37,6 +45,10 @@ public class SpawnerBehaviour : MonoBehaviour
         if (IsEnemyWaveDead())
         {
             StartCoroutine(StartEnemyWave());            
+        }
+        if (!isBonusAlive)
+        {
+            SpawnBonus();
         }
 
     }
@@ -103,6 +115,23 @@ public class SpawnerBehaviour : MonoBehaviour
     public void KillEnemy(GameObject enemy)
     {
         aliveEnemies.Remove(enemy);
+    }
+
+    private void SpawnBonus()
+    {
+        isBonusAlive = true;
+        GameObject[] grounds = GameObject.FindGameObjectsWithTag(groundTag);
+        Bounds[] groundBounds = new Bounds[grounds.Length];
+        for(int i = 0; i < grounds.Length; i++)
+        {
+            groundBounds[i] = grounds[i].GetComponent<MeshRenderer>().bounds;
+            groundBounds[i].Expand(new Vector3(-boundsOffset, groundSurfaceY, -boundsOffset));
+        }
+        System.Random rnd = new System.Random();
+        int randomIndex = rnd.Next(0, groundBounds.Length);
+        Vector3 randomPosition = groundBounds[randomIndex].center + Vector3.Scale(UnityEngine.Random.insideUnitSphere, groundBounds[randomIndex].size * 0.5f);
+        randomPosition.y = groundSurfaceY;
+        GameObject fireballBonus = Instantiate(fireballBonusPrefab, randomPosition, Quaternion.identity);
     }
 
     public GameLogic Game

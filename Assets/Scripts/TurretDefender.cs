@@ -7,6 +7,8 @@ public class TurretDefender : MonoBehaviour
 {
     private const string towerCollisionTag = "TowerCollision";
     private const string towerTag = "Tower";
+    private const int damageIncrement = 15;
+    private const float cooldownDecrement = 0.25f;
     public List<GameObject> aimedEnemies;
     [SerializeField]private GameObject aimedEnemy;
     [SerializeField] private GameObject canonBall;
@@ -19,6 +21,10 @@ public class TurretDefender : MonoBehaviour
     private string[] allTargetTag = {"Enemy", "Slow", "FastEnemy" };
     private Transform turretCanon;
     private Transform towerCanvas;
+    private int towerLevel = 1;
+    private int buildedTurn = 1;
+    private int levelUpCost = 20;
+    private int towerCost;
     [SerializeField] public Camera mainCamera;
 
     void Awake()
@@ -26,18 +32,12 @@ public class TurretDefender : MonoBehaviour
         turretCanon = this.gameObject.transform.GetChild(0);
         aimedEnemies = new List<GameObject>();
         towerCanvas = this.gameObject.transform.GetChild(2);
+        buildedTurn = GameLogic.GameInstance.TurnNumber;
     }
 
     private void Update()
     {
         towerCanvas.LookAt(mainCamera.transform);
-            //Get the direction towards the waypoint to look at that direction
-            
-        //Vector3 direction = (aimedEnemy.transform.position - transform.position).normalized;
-
-            //Change the orientation of the tower
-          //  transform.LookAt(direction);
-            //transform.rotation = Quaternion.Euler(new Vector3(0, transform.rotation.eulerAngles.y, 0));
     }
     void AimAtEnemy()
     {
@@ -161,4 +161,62 @@ public class TurretDefender : MonoBehaviour
         }
     }
 
+    
+
+    public void LevelUpTower()
+    {
+        if(GameLogic.GameInstance.Coins < levelUpCost)
+        {
+            Debug.Log("Not enough Coins to Level Up Turret");
+        }
+        else
+        {
+            GameLogic.GameInstance.SpendCoins(levelUpCost);
+            towerLevel++;
+            firePower += damageIncrement;
+            cooldownTime -= cooldownDecrement;
+            GetComponentInChildren<TurretUI>().UpdateText();
+        }
+        
+    }
+
+    public void UnBuild()
+    {
+        if(GameLogic.GameInstance.Turn == GameLogic.TurnPhase.Building)
+        {
+            if(buildedTurn == GameLogic.GameInstance.TurnNumber) 
+            {
+                GameLogic.GameInstance.GetCoins(towerCost);
+            }
+            else if(buildedTurn < GameLogic.GameInstance.TurnNumber)
+            {
+                GameLogic.GameInstance.GetCoins(towerCost / 2);
+            }
+            Destroy(this.gameObject);
+        }
+    }
+   
+    public int TowerLevel
+    {
+        get
+        {
+            return towerLevel;
+        }
+    }
+
+    public int BuildedTurn
+    {
+        set
+        {
+            buildedTurn = value;
+        }
+    }
+
+    public int TowerCost
+    {
+        set
+        {
+            towerCost = value;
+        }
+    }
 }

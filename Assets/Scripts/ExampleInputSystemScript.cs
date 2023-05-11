@@ -69,7 +69,7 @@ public class ExampleInputSystemScript : MonoBehaviour
         {
             if (gameInstance.Coins >= buildingCost)
             {
-                if (leftController.GetComponent<TowerBuilder>().BuildTower())
+                if (leftController.GetComponent<TowerBuilder>().BuildTower(buildingCost))
                 {
                     isBuilding = false;
                     leftController.GetComponent<TowerBuilder>().enabled = false;

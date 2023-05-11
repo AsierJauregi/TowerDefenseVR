@@ -123,7 +123,7 @@ public class TowerBuilder : MonoBehaviour
         }
     }
     
-    public bool BuildTower()
+    public bool BuildTower(int towerCost)
     {
         if (isBuildable)
         {
@@ -131,6 +131,7 @@ public class TowerBuilder : MonoBehaviour
             StopPrevisualization();
             GameObject newTurret = Instantiate(turretPrefab, turretPosition, Quaternion.identity);
             newTurret.GetComponent<TurretDefender>().mainCamera = mainCamera;
+            newTurret.GetComponent<TurretDefender>().TowerCost = towerCost;
             return true;
         }
         else

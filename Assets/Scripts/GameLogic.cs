@@ -90,4 +90,11 @@ public class GameLogic : MonoBehaviour
             return turnPhase;
         }
     }
+    public int TurnNumber
+    {
+        get
+        {
+            return turnNumber;
+        }
+    }
 }
