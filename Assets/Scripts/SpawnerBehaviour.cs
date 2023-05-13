@@ -35,7 +35,6 @@ public class SpawnerBehaviour : MonoBehaviour
         waypoints = new Transform[waypointList.transform.childCount];
         for (int i = 0; i < waypointList.transform.childCount; i++)
         {
-            Array.Resize(ref waypoints, waypoints.Length + 1);
             waypoints[i] = waypointList.transform.GetChild(i);
         }
     }

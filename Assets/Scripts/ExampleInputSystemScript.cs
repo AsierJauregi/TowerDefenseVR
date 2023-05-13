@@ -14,6 +14,7 @@ public class ExampleInputSystemScript : MonoBehaviour
     [SerializeField] InputActionReference endBuildingReference;
     [SerializeField] InputActionReference menuSelectionVerticalReference;
     [SerializeField] InputActionReference menuSelectionHorizontalReference;
+    [SerializeField] InputActionReference menuSelectionReference;
 
     [Header ("Controllers")]
     [SerializeField] GameObject leftController;
@@ -24,11 +25,9 @@ public class ExampleInputSystemScript : MonoBehaviour
     private Vector2 menuSelectionDirection;
     [SerializeField] private const int buildingCost = 30;
     bool isBuilding = false;
-    bool radialMenuOn;
 
     private void Awake()
     {
-        radialMenuOn = false;
         radialMenu.SetActive(false);
         
 
@@ -44,8 +43,9 @@ public class ExampleInputSystemScript : MonoBehaviour
             float verticalJoystickInput = menuSelectionVerticalReference.action.ReadValue<float>();
             float horizontalJoystickInput = menuSelectionHorizontalReference.action.ReadValue<float>();
             menuSelectionDirection.Set(horizontalJoystickInput, verticalJoystickInput);
-            Debug.Log(menuSelectionDirection);
-            radialMenu.GetComponent<RadialMenu>().TouchPosition = menuSelectionDirection; 
+
+            Vector2 JoystickInput = menuSelectionReference.action.ReadValue<Vector2>();
+            radialMenu.GetComponent<RadialMenu>().TouchPosition = JoystickInput; 
         }
     }
 
@@ -54,12 +54,14 @@ public class ExampleInputSystemScript : MonoBehaviour
         myActions.Enable();
         menuSelectionVerticalReference.action.Enable();
         menuSelectionHorizontalReference.action.Enable();
+        menuSelectionReference.action.Enable();
     }
 
     private void OnDisable()
     {
         menuSelectionVerticalReference.action.Disable();
         menuSelectionHorizontalReference.action.Disable();
+        menuSelectionReference.action.Disable();
         myActions.Disable();
     }
 
