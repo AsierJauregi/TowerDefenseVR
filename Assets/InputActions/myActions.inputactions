@@ -388,6 +388,34 @@
                     "isPartOfComposite": true
                 }
             ]
+        },
+        {
+            "name": "Radial Menu Selection",
+            "id": "f7f47a90-caae-42b8-8983-dded3e87ecf6",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Value",
+                    "id": "3cd153ce-c83f-4978-b40b-1c389e9e6df6",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "67018952-9fc8-4d8a-b41d-e1a4e7d5af49",
+                    "path": "<XRController>{LeftHand}/joystick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
