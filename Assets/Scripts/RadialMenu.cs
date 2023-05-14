@@ -18,7 +18,7 @@ public class RadialMenu : MonoBehaviour
     private List<RadialSection> radialSections;
     private RadialSection highlightedsection;
 
-    private readonly float degreeIncrement = 90.0f;
+    private readonly float degreeIncrement = -90.0f;
 
     private void Awake()
     {
