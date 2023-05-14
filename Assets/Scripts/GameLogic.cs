@@ -15,6 +15,7 @@ public class GameLogic : MonoBehaviour
     [SerializeField] private int coins = 60;
 
     [SerializeField] GameObject enemySpawner;
+    [SerializeField] GameObject rightControllerCanvas;
     
 
     public static GameLogic GameInstance
@@ -75,12 +76,14 @@ public class GameLogic : MonoBehaviour
     {
         coins += coinQuantity;
         Debug.Log("+" + coinQuantity + " coins!");
+        rightControllerCanvas.GetComponent<CoinUIBehaviour>().UpdateCoins();
     }
 
     public void SpendCoins(int coinQuantity)
     {
         coins -= coinQuantity;
         Debug.Log("You used " + coinQuantity + " coins");
+        rightControllerCanvas.GetComponent<CoinUIBehaviour>().UpdateCoins();
     }
 
     public TurnPhase Turn
