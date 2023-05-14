@@ -124,4 +124,11 @@ public class Enemy : MonoBehaviour
             game = value;
         }
     }
+    public float MaxHealth
+    {
+        get
+        {
+            return maxHealth;
+        }
+    }
 }
