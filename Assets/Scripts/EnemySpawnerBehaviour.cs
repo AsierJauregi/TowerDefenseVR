@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnerBehaviour : MonoBehaviour
+public class EnemySpawnerBehaviour : MonoBehaviour
 {
     private const float groundSurfaceY = 0.856959f;
     private float firstWaveEnemyDistribution = 6;
@@ -45,7 +45,7 @@ public class SpawnerBehaviour : MonoBehaviour
         {
             StartCoroutine(StartEnemyWave());            
         }
-        if (!isBonusAlive)
+        if (!isBonusAlive && GameLogic.GameInstance.FireballSpells == 0)
         {
             SpawnBonus();
         }
@@ -131,6 +131,7 @@ public class SpawnerBehaviour : MonoBehaviour
         Vector3 randomPosition = groundBounds[randomIndex].center + Vector3.Scale(UnityEngine.Random.insideUnitSphere, groundBounds[randomIndex].size * 0.5f);
         randomPosition.y = groundSurfaceY;
         GameObject fireballBonus = Instantiate(fireballBonusPrefab, randomPosition, Quaternion.identity);
+        fireballBonus.GetComponent<BonusBehaviour>().enemySpawner = this.gameObject;
     }
 
     public GameLogic Game
@@ -142,6 +143,13 @@ public class SpawnerBehaviour : MonoBehaviour
         set
         {
             game = value;
+        }
+    }
+    public bool IsBonusAlive
+    {
+        set
+        {
+            isBonusAlive = value;
         }
     }
 }
