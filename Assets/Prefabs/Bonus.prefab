@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4543937675112411466}
+  - component: {fileID: 7617526437496313314}
   m_Layer: 0
   m_Name: Bonus
   m_TagString: Untagged
@@ -33,6 +34,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7617526437496313314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4543937675112411467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 205c5476ef66bc24ea403204737110eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  decrement: 0.03
+  fireballAura: {fileID: 6142798306035871056}
 --- !u!1001 &4543937675927920701
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46,7 +61,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7651850781625224557, guid: dd5c356ce7f322047b90e220bbb6e7ba, type: 3}
       propertyPath: m_Name
-      value: Fireball Bonus
+      value: Fireball Aura
       objectReference: {fileID: 0}
     - target: {fileID: 7740751272304352472, guid: dd5c356ce7f322047b90e220bbb6e7ba, type: 3}
       propertyPath: m_RootOrder
@@ -100,6 +115,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7740751272304352472, guid: dd5c356ce7f322047b90e220bbb6e7ba, type: 3}
   m_PrefabInstance: {fileID: 4543937675927920701}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6142798306035871056 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7651850781625224557, guid: dd5c356ce7f322047b90e220bbb6e7ba, type: 3}
+  m_PrefabInstance: {fileID: 4543937675927920701}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5300576720771475046
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -151,6 +171,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5419250370408731291, guid: aefcc392191115c48a277b1631ae2591, type: 3}
+      propertyPath: parentBonus
+      value: 
+      objectReference: {fileID: 4543937675112411467}
     - target: {fileID: 5684462765057629749, guid: aefcc392191115c48a277b1631ae2591, type: 3}
       propertyPath: m_Name
       value: Fireball
@@ -159,12 +183,67 @@ PrefabInstance:
       propertyPath: m_ThrowVelocityScale
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 8538861504962422886, guid: aefcc392191115c48a277b1631ae2591, type: 3}
+      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8538861504962422886, guid: aefcc392191115c48a277b1631ae2591, type: 3}
+      propertyPath: m_FirstSelectEntered.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8538861504962422886, guid: aefcc392191115c48a277b1631ae2591, type: 3}
+      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8538861504962422886, guid: aefcc392191115c48a277b1631ae2591, type: 3}
+      propertyPath: m_FirstSelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8538861504962422886, guid: aefcc392191115c48a277b1631ae2591, type: 3}
+      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8538861504962422886, guid: aefcc392191115c48a277b1631ae2591, type: 3}
+      propertyPath: m_FirstSelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 196580646684210429}
+    - target: {fileID: 8538861504962422886, guid: aefcc392191115c48a277b1631ae2591, type: 3}
+      propertyPath: m_FirstSelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8538861504962422886, guid: aefcc392191115c48a277b1631ae2591, type: 3}
+      propertyPath: m_FirstSelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GainFireball
+      objectReference: {fileID: 0}
+    - target: {fileID: 8538861504962422886, guid: aefcc392191115c48a277b1631ae2591, type: 3}
+      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UnityEngine.Rigidbody, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8538861504962422886, guid: aefcc392191115c48a277b1631ae2591, type: 3}
+      propertyPath: m_FirstSelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: FireballBehaviour, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8538861504962422886, guid: aefcc392191115c48a277b1631ae2591, type: 3}
+      propertyPath: m_FirstSelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8538861504962422888, guid: aefcc392191115c48a277b1631ae2591, type: 3}
       propertyPath: m_Mass
       value: 0.01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aefcc392191115c48a277b1631ae2591, type: 3}
+--- !u!114 &196580646684210429 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5419250370408731291, guid: aefcc392191115c48a277b1631ae2591, type: 3}
+  m_PrefabInstance: {fileID: 5300576720771475046}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37f67e4ca77c16e46a15522fdbad3de3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &9111414715059534467 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4034470009381723365, guid: aefcc392191115c48a277b1631ae2591, type: 3}

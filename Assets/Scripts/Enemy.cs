@@ -89,7 +89,7 @@ public class Enemy : MonoBehaviour
         Destroy(GetComponent<Rigidbody>());
         Destroy(GetComponent<FollowThePath>());
         healthBarUI.SetActive(false);
-        spawner.GetComponent<SpawnerBehaviour>().KillEnemy(this.gameObject);
+        spawner.GetComponent<EnemySpawnerBehaviour>().KillEnemy(this.gameObject);
         game.GetCoins(coins);
         animator.SetTrigger("Die");
         yield return new WaitForSeconds(1.2f);

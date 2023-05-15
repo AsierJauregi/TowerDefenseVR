@@ -21,7 +21,7 @@ public class ExampleInputSystemScript : MonoBehaviour
     [SerializeField] GameObject rightController;
 
     [SerializeField] GameObject radialMenu;
-    private GameLogic gameInstance;
+    [SerializeField]private GameLogic gameInstance;
     private Vector2 menuSelectionDirection;
     [SerializeField] private const int buildingCost = 30;
     bool isBuilding = false;

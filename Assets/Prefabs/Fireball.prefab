@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 5684462765057629749}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1.013805, z: 0}
-  m_LocalScale: {x: 0.58, y: 0.920054, z: 0.58}
+  m_LocalScale: {x: 0.49, y: 0.77728707, z: 0.49}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6458758955177615200}
@@ -64,7 +64,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.45
+  m_Radius: 0.48
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8538861504962422886
 MonoBehaviour:
@@ -228,10 +228,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPathLayer: EnemyPath
+  pathLayer: Path
   enemyTag: Enemy
   fastEnemyTag: FastEnemy
   slowEnemyTag: SlowEnemy
   fireExplosion: {fileID: 131164, guid: 3c5f4e32698bdb04eaed647f60310510, type: 3}
+  parentBonus: {fileID: 0}
+  originPlatformTower: {fileID: 0}
 --- !u!1 &5753231710816190008
 GameObject:
   m_ObjectHideFlags: 0
