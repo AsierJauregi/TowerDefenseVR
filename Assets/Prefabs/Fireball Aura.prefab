@@ -24341,7 +24341,7 @@ GameObject:
   - component: {fileID: 5969324051683422028}
   - component: {fileID: 699687854943001936}
   m_Layer: 0
-  m_Name: Fireball Bonus
+  m_Name: Fireball Aura
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
