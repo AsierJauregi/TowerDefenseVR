@@ -13,6 +13,7 @@ public class GameLogic : MonoBehaviour
     private TurnPhase turnPhase = TurnPhase.Building;
     private int turnNumber = 1; //Once both phases have elapsed we go into the next turn
     [SerializeField] private int coins = 60;
+    [SerializeField] private int fireballSpells = 0;
 
     [SerializeField] GameObject enemySpawner;
     [SerializeField] GameObject rightControllerCanvas;
@@ -38,7 +39,7 @@ public class GameLogic : MonoBehaviour
        
         turnPhase = TurnPhase.Building;
         GameObject enemySpawner = GameObject.Find(spawnerName);
-        enemySpawner.GetComponent<SpawnerBehaviour>().Game = gameInstance;
+        enemySpawner.GetComponent<EnemySpawnerBehaviour>().Game = gameInstance;
         GameObject interactionManager = GameObject.Find(interactionManagerName);
         interactionManager.GetComponent<ExampleInputSystemScript>().Game = gameInstance;
 
@@ -55,7 +56,7 @@ public class GameLogic : MonoBehaviour
         if (turnPhase == TurnPhase.Building)
         {
             turnPhase = TurnPhase.Defense;
-            enemySpawner.GetComponent<SpawnerBehaviour>().enabled = true;
+            enemySpawner.GetComponent<EnemySpawnerBehaviour>().enabled = true;
             Debug.Log("Defense Turn Starting!");
         }
         else
@@ -65,6 +66,29 @@ public class GameLogic : MonoBehaviour
             turnNumber++; 
         }
     }
+    
+    public void GetCoins(int coinQuantity)
+    {
+        coins += coinQuantity;
+        rightControllerCanvas.GetComponent<RightControllerUIBehaviour>().UpdateCoins();
+    }
+
+    public void SpendCoins(int coinQuantity)
+    {
+        coins -= coinQuantity;
+        rightControllerCanvas.GetComponent<RightControllerUIBehaviour>().UpdateCoins();
+    }
+
+    public void GetFireballSpells(int spellQuantity)
+    {
+        fireballSpells += spellQuantity;
+        rightControllerCanvas.GetComponent<RightControllerUIBehaviour>().UpdateFireballSpells();
+    }
+    public void UseFireballSpell()
+    {
+        fireballSpells--;
+        rightControllerCanvas.GetComponent<RightControllerUIBehaviour>().UpdateFireballSpells();
+    }
     public int Coins
     {
         get
@@ -72,18 +96,12 @@ public class GameLogic : MonoBehaviour
             return coins;
         }
     }
-    public void GetCoins(int coinQuantity)
+    public int FireballSpells
     {
-        coins += coinQuantity;
-        Debug.Log("+" + coinQuantity + " coins!");
-        rightControllerCanvas.GetComponent<CoinUIBehaviour>().UpdateCoins();
-    }
-
-    public void SpendCoins(int coinQuantity)
-    {
-        coins -= coinQuantity;
-        Debug.Log("You used " + coinQuantity + " coins");
-        rightControllerCanvas.GetComponent<CoinUIBehaviour>().UpdateCoins();
+        get
+        {
+            return fireballSpells;
+        }
     }
 
     public TurnPhase Turn
