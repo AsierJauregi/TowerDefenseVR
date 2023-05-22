@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Animations;
+using UnityEngine.EventSystems;
 
-public class TowerUI : MonoBehaviour
+public class TowerUI : MonoBehaviour, IPointerExitHandler
 {
     private const string turretTag = "Tower";
     private const string platformTag = "PlatformTower";
@@ -16,6 +17,7 @@ public class TowerUI : MonoBehaviour
     private int towerLevel;
     private int towerLevelUpCost;
     [SerializeField] private string towerTag;
+    private bool isFirstHover = false;
 
     private void Awake()
     {
@@ -79,6 +81,30 @@ public class TowerUI : MonoBehaviour
         {
             towerLevelUpCost = GetComponentInParent<PlatformTowerBehaviour>().TowerLevelUpCost;
         }
+    }
+
+    public void OnHoverEnter()
+    {
+        if (!isFirstHover)
+        {
+            FirstHoverEnter();
+            Debug.Log("First Enter");
+        }
+        else
+        {
+            Debug.Log("Second Enter");
+            towerCanvas.GetComponent<Canvas>().enabled = true;
+        }
+    }
+
+    public void FirstHoverEnter()
+    {
+        isFirstHover = true;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        towerCanvas.GetComponent<Canvas>().enabled = false;
     }
 
     public Camera MainCamera
