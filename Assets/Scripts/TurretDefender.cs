@@ -22,23 +22,23 @@ public class TurretDefender : MonoBehaviour
     private Transform turretCanon;
     private Transform towerCanvas;
     private int towerLevel = 1;
+    private int maxTowerLevel = 3;
     private int buildedTurn = 1;
     private int levelUpCost = 20;
+    private int levelUpcostIncrement = 25;
     private int towerCost;
-    [SerializeField] public Camera mainCamera;
 
     void Awake()
     {
         turretCanon = this.gameObject.transform.GetChild(0);
         aimedEnemies = new List<GameObject>();
-        towerCanvas = this.gameObject.transform.GetChild(2);
+        
+    }
+    private void Start()
+    {
         buildedTurn = GameLogic.GameInstance.TurnNumber;
     }
 
-    private void Update()
-    {
-        towerCanvas.LookAt(mainCamera.transform);
-    }
     void AimAtEnemy()
     {
         if (aimedEnemies.Count > 0 && aimedEnemy != null)
@@ -169,13 +169,19 @@ public class TurretDefender : MonoBehaviour
         {
             Debug.Log("Not enough Coins to Level Up Turret");
         }
+        else if (towerLevel >= maxTowerLevel)
+        {
+            Debug.Log("Max level reached");
+        }
         else
         {
             GameLogic.GameInstance.SpendCoins(levelUpCost);
             towerLevel++;
             firePower += damageIncrement;
             cooldownTime -= cooldownDecrement;
-            GetComponentInChildren<TurretUI>().UpdateText();
+            levelUpCost += levelUpcostIncrement;
+            GetComponentInChildren<TowerUI>().UpdateNameText();
+            GetComponentInChildren<TowerUI>().UpdateUpgradeButtonText();
         }
         
     }
@@ -201,6 +207,13 @@ public class TurretDefender : MonoBehaviour
         get
         {
             return towerLevel;
+        }
+    }
+    public int TowerLevelUpCost
+    {
+        get
+        {
+            return levelUpCost;
         }
     }
 

@@ -15,7 +15,7 @@ public class FireballBehaviour : MonoBehaviour
     [SerializeField] private GameObject parentBonus;
     public GameObject originPlatformTower;
     
-    [SerializeField] private const int spellQuantity = 3;
+    [SerializeField] private int spellQuantity = 1;
     private bool fireballCaught = false;
 
     private void OnCollisionEnter(Collision collision)
@@ -50,6 +50,13 @@ public class FireballBehaviour : MonoBehaviour
         set
         {
             fireballCaught = value;
+        }
+    }
+    public int SpellQuantity
+    {
+        set
+        {
+            spellQuantity = value;
         }
     }
 }

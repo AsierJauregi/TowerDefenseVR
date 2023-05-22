@@ -12,6 +12,7 @@ TagManager:
   - TowerCollision
   - Fire
   - Ground
+  - PlatformTower
   layers:
   - Default
   - TransparentFX

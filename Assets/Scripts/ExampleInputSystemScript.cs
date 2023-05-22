@@ -12,8 +12,6 @@ public class ExampleInputSystemScript : MonoBehaviour
     [SerializeField] InputActionReference buildReference;
     [SerializeField] InputActionReference letBuildReference;
     [SerializeField] InputActionReference endBuildingReference;
-    [SerializeField] InputActionReference menuSelectionVerticalReference;
-    [SerializeField] InputActionReference menuSelectionHorizontalReference;
     [SerializeField] InputActionReference menuSelectionReference;
 
     [Header ("Controllers")]
@@ -23,7 +21,9 @@ public class ExampleInputSystemScript : MonoBehaviour
     [SerializeField] GameObject radialMenu;
     [SerializeField]private GameLogic gameInstance;
     private Vector2 menuSelectionDirection;
-    [SerializeField] private const int buildingCost = 30;
+    private const int buildingTurretCost = 30;
+    private const int buildingPlatformCost = 60;
+
     bool isBuilding = false;
 
     private void Awake()
@@ -34,17 +34,18 @@ public class ExampleInputSystemScript : MonoBehaviour
         buildReference.action.performed += Build_performed;
         letBuildReference.action.performed += Let_Build;
         endBuildingReference.action.performed += BuildingTurnEnded;
+
+        leftController.GetComponent<TowerBuilder>().BuildingTurretCost = buildingTurretCost;
+        leftController.GetComponent<TowerBuilder>().BuildingPlatformCost = buildingPlatformCost;
+
     }
 
     private void Update()
     {
         if (isBuilding)
         {
-            float verticalJoystickInput = menuSelectionVerticalReference.action.ReadValue<float>();
-            float horizontalJoystickInput = menuSelectionHorizontalReference.action.ReadValue<float>();
-            menuSelectionDirection.Set(horizontalJoystickInput, verticalJoystickInput);
-
             Vector2 JoystickInput = menuSelectionReference.action.ReadValue<Vector2>();
+            JoystickInput = new Vector2(-JoystickInput.x, JoystickInput.y);
             radialMenu.GetComponent<RadialMenu>().TouchPosition = JoystickInput; 
         }
     }
@@ -52,15 +53,11 @@ public class ExampleInputSystemScript : MonoBehaviour
     private void OnEnable()
     {
         myActions.Enable();
-        menuSelectionVerticalReference.action.Enable();
-        menuSelectionHorizontalReference.action.Enable();
         menuSelectionReference.action.Enable();
     }
 
     private void OnDisable()
     {
-        menuSelectionVerticalReference.action.Disable();
-        menuSelectionHorizontalReference.action.Disable();
         menuSelectionReference.action.Disable();
         myActions.Disable();
     }
@@ -69,14 +66,32 @@ public class ExampleInputSystemScript : MonoBehaviour
     {
         if (isBuilding)
         {
-            if (gameInstance.Coins >= buildingCost)
+            if (leftController.GetComponent<TowerBuilder>().CurrentTowerType == TowerBuilder.TowerType.Turret)
             {
-                if (leftController.GetComponent<TowerBuilder>().BuildTower(buildingCost))
-                {
-                    isBuilding = false;
-                    leftController.GetComponent<TowerBuilder>().enabled = false;
-                    gameInstance.SpendCoins(buildingCost);
-                }
+                BuildTower(buildingTurretCost);
+            }
+            else if (leftController.GetComponent<TowerBuilder>().CurrentTowerType == TowerBuilder.TowerType.Platform)
+            { 
+                BuildTower(buildingPlatformCost);
+            }
+            else
+            {
+                Debug.Log("Tower Type could not be resolved");
+            }
+        }
+    }
+
+    private void BuildTower(int buildingCost)
+    {
+        if (gameInstance.Coins >= buildingCost)
+        {
+            if (leftController.GetComponent<TowerBuilder>().BuildTower(buildingCost))
+            {
+                isBuilding = false;
+                leftController.GetComponent<TowerBuilder>().enabled = false;
+                gameInstance.SpendCoins(buildingCost);
+                rightController.GetComponentInChildren<RightControllerUIBehaviour>().EnableTowerCostText(false);
+                radialMenu.SetActive(false);
             }
         }
     }
@@ -87,13 +102,14 @@ public class ExampleInputSystemScript : MonoBehaviour
         {
             Debug.Log("Building");
             isBuilding = true;
-            radialMenu.SetActive(true);
             leftController.GetComponent<TowerBuilder>().enabled = true;
+            radialMenu.SetActive(true);
         }
         else
         {
             Debug.Log("Not building");
             isBuilding = false;
+            rightController.GetComponentInChildren<RightControllerUIBehaviour>().EnableTowerCostText(false);
             radialMenu.SetActive(false);
             leftController.GetComponent<TowerBuilder>().StopPrevisualization();
             leftController.GetComponent<TowerBuilder>().enabled = false;
@@ -101,7 +117,7 @@ public class ExampleInputSystemScript : MonoBehaviour
     }
     private void BuildingTurnEnded(InputAction.CallbackContext obj)
     {
-        gameInstance.PassTurn();
+        if(gameInstance.Turn == GameLogic.TurnPhase.Building) gameInstance.PassTurn();
     }
 
     public GameLogic Game

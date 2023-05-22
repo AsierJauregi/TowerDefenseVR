@@ -5,14 +5,24 @@ using UnityEngine;
 public class PlatformTowerBehaviour : MonoBehaviour
 {
     private const float PlatformHeight = 4.295614f;
-    private const float xFireballSpawnOffset = -0.9f;
-    private const float yFireballSpawnOffset = 1f;
-    private const float zFireballSpawnOffset = 0.7f;
+    private const int levelUpCostIncrement = 25;
+    private Vector3 fireballSpawnOffset = new Vector3(-0.9f, 1f, 0.7f);
     [SerializeField] private GameObject xrOrigin;
     [SerializeField] private GameObject fireballPrefab;
     [SerializeField] private string playerTag = "Player";
     private bool isFireballAlive = false;
-        
+    private Camera mainCamera;
+    private int towerLevel = 1;
+    private int maxTowerLevel = 3;
+    private int buildedTurn = 1;
+    private int towerCost;
+    private int spellQuantity = 1;
+    private int levelUpCost = 20;
+
+    private void Start()
+    {
+        buildedTurn = GameLogic.GameInstance.TurnNumber;
+    }
     public void TransportPlayer()
     {
         Vector3 platformPosition = transform.position;
@@ -27,7 +37,6 @@ public class PlatformTowerBehaviour : MonoBehaviour
         {   
             if(GameLogic.GameInstance.FireballSpells > 0 && !isFireballAlive)
             {
-                
                 SpawnFireball();
             }
 
@@ -37,10 +46,48 @@ public class PlatformTowerBehaviour : MonoBehaviour
     private void SpawnFireball()
     {
         isFireballAlive = true;
-        Vector3 fireballPosition = new Vector3(xrOrigin.transform.position.x + xFireballSpawnOffset, xrOrigin.transform.position.y + yFireballSpawnOffset, xrOrigin.transform.position.z + zFireballSpawnOffset);
-        GameObject newFireball = Instantiate(fireballPrefab, fireballPosition, Quaternion.identity);
+        xrOrigin.transform.rotation = Quaternion.EulerAngles(xrOrigin.transform.rotation.x, mainCamera.transform.rotation.y, xrOrigin.transform.rotation.z);
+        GameObject newFireball = Instantiate(fireballPrefab, xrOrigin.transform.position + fireballSpawnOffset, xrOrigin.transform.rotation);
         newFireball.GetComponent<FireballBehaviour>().originPlatformTower = this.gameObject;
+        newFireball.GetComponent<FireballBehaviour>().SpellQuantity = spellQuantity;
         GameLogic.GameInstance.UseFireballSpell();
+    }
+    public void LevelUpTower()
+    {
+        if (GameLogic.GameInstance.Coins < levelUpCost)
+        {
+            Debug.Log("Not enough Coins to Level Up Turret");
+        }
+        else if(towerLevel >= maxTowerLevel)
+        {
+            Debug.Log("Max level reached");
+        }
+        else
+        {
+            GameLogic.GameInstance.SpendCoins(levelUpCost);
+            towerLevel++;
+            spellQuantity++;
+            levelUpCost += levelUpCostIncrement;
+            GetComponentInChildren<TowerUI>().UpdateNameText();
+            
+            GetComponentInChildren<TowerUI>().UpdateUpgradeButtonText();
+        }
+
+    }
+    public void UnBuild()
+    {
+        if (GameLogic.GameInstance.Turn == GameLogic.TurnPhase.Building)
+        {
+            if (buildedTurn == GameLogic.GameInstance.TurnNumber)
+            {
+                GameLogic.GameInstance.GetCoins(towerCost);
+            }
+            else if (buildedTurn < GameLogic.GameInstance.TurnNumber)
+            {
+                GameLogic.GameInstance.GetCoins(towerCost / 2);
+            }
+            Destroy(this.gameObject);
+        }
     }
 
     public bool IsFireballAlive
@@ -48,6 +95,49 @@ public class PlatformTowerBehaviour : MonoBehaviour
         set
         {
             isFireballAlive = value;
+        }
+    }
+
+    public GameObject XROrigin
+    {
+        set
+        {
+            xrOrigin = value;
+        }
+    }
+    public Camera MainCamera
+    {
+        set
+        {
+            mainCamera = value;
+        }
+    }
+    public int TowerCost
+    {
+        set
+        {
+            towerCost = value;
+        }
+    }
+    public int TowerLevel
+    {
+        get
+        {
+            return towerLevel;
+        }
+    }
+    public int TowerLevelUpCost
+    {
+        get
+        {
+            return levelUpCost;
+        }
+    }
+    public int BuildedTurn
+    {
+        set
+        {
+            buildedTurn = value;
         }
     }
 }
