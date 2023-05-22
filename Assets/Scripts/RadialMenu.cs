@@ -18,7 +18,7 @@ public class RadialMenu : MonoBehaviour
     private List<RadialSection> radialSections;
     private RadialSection highlightedsection;
 
-    private readonly float degreeIncrement = -90.0f;
+    private readonly float degreeIncrement = 90.0f;
 
     private void Awake()
     {
@@ -30,7 +30,7 @@ public class RadialMenu : MonoBehaviour
     {
         radialSections = new List<RadialSection>() { top, right, bottom, left };
 
-        foreach(RadialSection section in radialSections)
+        foreach (RadialSection section in radialSections)
         {
             section.iconRenderer.sprite = section.icon;
         }
@@ -41,8 +41,12 @@ public class RadialMenu : MonoBehaviour
         Vector2 direction = Vector2.zero + touchPosition;
         float rotation = GetDegrees(direction);
         SetCursorPosition();
-        SetSelectedRotation(rotation);
-        SetSelectedEvent(rotation);
+        if (rotation != 0)
+        {
+            SetSelectedRotation(rotation);
+            SetSelectedEvent(rotation);
+        }
+
     }
     public void Show(bool value)
     {
@@ -55,7 +59,7 @@ public class RadialMenu : MonoBehaviour
         result *= Mathf.Rad2Deg;
 
         if (result < 0) result += 360;
-        
+
         return result;
     }
     private void SetCursorPosition()
@@ -80,9 +84,10 @@ public class RadialMenu : MonoBehaviour
     {
         int index = GetNearestIncrement(currentRotation);
 
-        if(index == 4) index = 0;
+        if (index == 4) index = 0;
 
         highlightedsection = radialSections[index];
+        highlightedsection.onPress.Invoke();
     }
 
     public Vector2 TouchPosition
