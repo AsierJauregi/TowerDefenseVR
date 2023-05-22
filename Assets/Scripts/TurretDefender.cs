@@ -18,7 +18,7 @@ public class TurretDefender : MonoBehaviour
     [SerializeField] private float rotationSpeed = 10f;
     private float nextFireTime = 0;
     [SerializeField] private string preferredTargetTag = "FastEnemy";
-    private string[] allTargetTag = {"Enemy", "SlowEnemy", "FastEnemy" };
+    private string[] allTargetTag = {"Enemy", "FastEnemy" };
     private Transform turretCanon;
     private Transform towerCanvas;
     private int towerLevel = 1;
@@ -243,6 +243,7 @@ public class TurretDefender : MonoBehaviour
         set
         {
             preferredTargetTag = value;
+            Debug.Log(name + " preferred tag: " + value);
         }
     }
 }

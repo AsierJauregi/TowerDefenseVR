@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class TowerUI : MonoBehaviour, IPointerExitHandler
 {
@@ -11,13 +12,18 @@ public class TowerUI : MonoBehaviour, IPointerExitHandler
     private const string platformTag = "PlatformTower";
     [SerializeField] private GameObject towerNameTextPanel;
     [SerializeField] private GameObject upgradeButton;
+    [SerializeField] private GameObject priorizationButton;
+    [SerializeField] private GameObject normalEnemyTagButton;
+    [SerializeField] private GameObject fastEnemyTagButton;
     [SerializeField]private Camera mainCamera;
     private GameObject towerCanvas;
+    [SerializeField] private GameObject priorizationCanvas;
 
     private int towerLevel;
     private int towerLevelUpCost;
     [SerializeField] private string towerTag;
     private bool isFirstHover = false;
+    private bool isPriorizationCanvasChanged = false;
 
     private void Awake()
     {
@@ -39,6 +45,8 @@ public class TowerUI : MonoBehaviour, IPointerExitHandler
         constraintSource.weight = 1f;
         lookAtConstraint.AddSource(constraintSource);
         lookAtConstraint.constraintActive = true;
+        towerCanvas.GetComponent<Canvas>().enabled = false;
+        priorizationCanvas.GetComponent<Canvas>().enabled = false;
     }
     public void UpdateNameText()
     {
@@ -88,11 +96,9 @@ public class TowerUI : MonoBehaviour, IPointerExitHandler
         if (!isFirstHover)
         {
             FirstHoverEnter();
-            Debug.Log("First Enter");
         }
         else
         {
-            Debug.Log("Second Enter");
             towerCanvas.GetComponent<Canvas>().enabled = true;
         }
     }
@@ -104,7 +110,24 @@ public class TowerUI : MonoBehaviour, IPointerExitHandler
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        towerCanvas.GetComponent<Canvas>().enabled = false;
+        Debug.Log("UI exited");
+        if (priorizationButton.GetComponent<Button>().IsInteractable())
+        {
+            towerCanvas.GetComponent<Canvas>().enabled = false;
+        }
+        else
+        {
+            if( !normalEnemyTagButton.GetComponent<Button>().IsInteractable() && isPriorizationCanvasChanged)
+            {
+                towerCanvas.GetComponent<Canvas>().enabled = false;
+            }
+        }
+    }
+
+    public void PriorizationButton() 
+    {
+        Debug.Log("Priorization Button clicked");
+        isPriorizationCanvasChanged = false;
     }
 
     public Camera MainCamera
@@ -113,5 +136,9 @@ public class TowerUI : MonoBehaviour, IPointerExitHandler
         {
             mainCamera = value;
         }
+    }
+    public void IsPriorizationCanvasChanged()
+    {
+        isPriorizationCanvasChanged = true;
     }
 }
