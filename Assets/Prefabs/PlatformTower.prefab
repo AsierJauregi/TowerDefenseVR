@@ -1410,6 +1410,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xrOrigin: {fileID: 0}
   fireballPrefab: {fileID: 5684462765057629749, guid: aefcc392191115c48a277b1631ae2591, type: 3}
+  leftController: {fileID: 0}
   playerTag: Player
 --- !u!65 &6750327037388451940
 BoxCollider:

@@ -21,7 +21,7 @@ public class TowerBuilder : MonoBehaviour
     [SerializeField] private List<Material> redMaterials;
     [SerializeField] private Camera mainCamera;
 
-    private XRController leftController;
+    [SerializeField] private GameObject leftController;
     [SerializeField] private GameObject rightController;
     private XRRayInteractor rayInteractor;
 
@@ -32,11 +32,11 @@ public class TowerBuilder : MonoBehaviour
     private bool isBuildable = false;
     [SerializeField] private int buildingTurretCost;
     [SerializeField] private int buildingPlatformCost;
-    private bool platformIsBuilt = false;
+    [SerializeField] private bool platformIsBuilt = false;
     
     private void Awake()
     {
-        leftController = GetComponent<XRController>();
+        leftController = transform.gameObject;
         rayInteractor = GetComponent<XRRayInteractor>();
     }
 
@@ -145,7 +145,7 @@ public class TowerBuilder : MonoBehaviour
             Transform towerTop = currentTowerPrevisualization.transform.GetChild(0);
             Transform towerBase = currentTowerPrevisualization.transform.GetChild(1);
 
-            if (IsPrevisualizationGrounded(hit) && !isPrevisualizationColliding)
+            if (IsPrevisualizationGrounded(hit) && !isPrevisualizationColliding && !(currentTowerType == TowerType.Platform && platformIsBuilt))
             {
                 if(currentTowerType == TowerType.Turret)
                 {
@@ -155,7 +155,7 @@ public class TowerBuilder : MonoBehaviour
                     towerBase.GetChild(1).GetComponent<MeshRenderer>().material = blueMaterials[3];
                     towerBase.GetChild(2).GetComponent<MeshRenderer>().material = blueMaterials[4];
                 }
-                else
+                else if(currentTowerType == TowerType.Platform)
                 {
                     towerTop.GetChild(0).GetComponent<MeshRenderer>().material = blueMaterials[0];
                     towerBase.GetChild(0).GetComponent<MeshRenderer>().material = blueMaterials[3];
@@ -174,7 +174,7 @@ public class TowerBuilder : MonoBehaviour
                     towerBase.GetChild(1).GetComponent<MeshRenderer>().material = redMaterials[3];
                     towerBase.GetChild(2).GetComponent<MeshRenderer>().material = redMaterials[4];
                 }
-                else
+                else if(currentTowerType == TowerType.Platform)
                 {
                     towerTop.GetChild(0).GetComponent<MeshRenderer>().material = redMaterials[0];
                     towerBase.GetChild(0).GetComponent<MeshRenderer>().material = redMaterials[3];
@@ -217,6 +217,7 @@ public class TowerBuilder : MonoBehaviour
         newPlatform.GetComponent<PlatformTowerBehaviour>().MainCamera = mainCamera;
         newPlatform.GetComponent<PlatformTowerBehaviour>().TowerCost = towerCost;
         newPlatform.GetComponent<PlatformTowerBehaviour>().BuildedTurn = GameLogic.GameInstance.TurnNumber;
+        newPlatform.GetComponent<PlatformTowerBehaviour>().LeftController = leftController;
         platformIsBuilt = true;
     }
 
@@ -226,6 +227,11 @@ public class TowerBuilder : MonoBehaviour
         newTurret.GetComponentInChildren<TowerUI>().MainCamera = mainCamera;
         newTurret.GetComponent<TurretDefender>().TowerCost = towerCost;
         newTurret.GetComponent<TurretDefender>().BuildedTurn = GameLogic.GameInstance.TurnNumber;
+    }
+    
+    public void PlatformUnbuilt()
+    {
+        platformIsBuilt = false;
     }
 
     public void ChangeToTurret()
@@ -260,14 +266,6 @@ public class TowerBuilder : MonoBehaviour
         set
         {
             buildingPlatformCost = value;
-        }
-    }
-
-    public bool PlatformIsBuilt
-    {
-        set
-        {
-            platformIsBuilt = value;
         }
     }
 }

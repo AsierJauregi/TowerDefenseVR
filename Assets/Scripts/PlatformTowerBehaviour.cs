@@ -9,6 +9,7 @@ public class PlatformTowerBehaviour : MonoBehaviour
     private Vector3 fireballSpawnOffset = new Vector3(-0.9f, 1f, 0.7f);
     [SerializeField] private GameObject xrOrigin;
     [SerializeField] private GameObject fireballPrefab;
+    [SerializeField] private GameObject leftController;
     [SerializeField] private string playerTag = "Player";
     private bool isFireballAlive = false;
     private Camera mainCamera;
@@ -78,15 +79,21 @@ public class PlatformTowerBehaviour : MonoBehaviour
     {
         if (GameLogic.GameInstance.Turn == GameLogic.TurnPhase.Building)
         {
-            if (buildedTurn == GameLogic.GameInstance.TurnNumber)
-            {
-                GameLogic.GameInstance.GetCoins(towerCost);
-            }
-            else if (buildedTurn < GameLogic.GameInstance.TurnNumber)
-            {
-                GameLogic.GameInstance.GetCoins(towerCost / 2);
-            }
+            ReturnCoinsForTower();
+            leftController.GetComponent<TowerBuilder>().PlatformUnbuilt();
             Destroy(this.gameObject);
+        }
+    }
+
+    private void ReturnCoinsForTower()
+    {
+        if (buildedTurn == GameLogic.GameInstance.TurnNumber)
+        {
+            GameLogic.GameInstance.GetCoins(towerCost);
+        }
+        else if (buildedTurn < GameLogic.GameInstance.TurnNumber)
+        {
+            GameLogic.GameInstance.GetCoins(towerCost / 2);
         }
     }
 
@@ -138,6 +145,13 @@ public class PlatformTowerBehaviour : MonoBehaviour
         set
         {
             buildedTurn = value;
+        }
+    }
+    public GameObject LeftController
+    {
+        set
+        {
+            leftController = value;
         }
     }
 }
