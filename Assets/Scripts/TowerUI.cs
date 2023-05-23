@@ -8,8 +8,7 @@ using UnityEngine.UI;
 
 public class TowerUI : MonoBehaviour, IPointerExitHandler
 {
-    private const string turretTag = "Tower";
-    private const string platformTag = "PlatformTower";
+
     [SerializeField] private GameObject towerNameTextPanel;
     [SerializeField] private GameObject upgradeButton;
     [SerializeField] private GameObject priorizationButton;
@@ -22,6 +21,8 @@ public class TowerUI : MonoBehaviour, IPointerExitHandler
     private int towerLevel;
     private int towerLevelUpCost;
     [SerializeField] private string towerTag;
+    private const string turretTag = "Tower";
+    private const string platformTag = "PlatformTower";
     private bool isFirstHover = false;
     private bool isPriorizationCanvasChanged = false;
 
@@ -46,7 +47,7 @@ public class TowerUI : MonoBehaviour, IPointerExitHandler
         lookAtConstraint.AddSource(constraintSource);
         lookAtConstraint.constraintActive = true;
         towerCanvas.GetComponent<Canvas>().enabled = false;
-        priorizationCanvas.GetComponent<Canvas>().enabled = false;
+        if(towerTag == turretTag) priorizationCanvas.GetComponent<Canvas>().enabled = false;
     }
     public void UpdateNameText()
     {
@@ -110,18 +111,34 @@ public class TowerUI : MonoBehaviour, IPointerExitHandler
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log("UI exited");
+        if (towerTag == turretTag)
+        {
+            TurretOnPointerExit();
+        }
+        else if (towerTag == platformTag)
+        {
+            PlatformOnPointerExit();
+        }
+    }
+
+    private void TurretOnPointerExit()
+    {
         if (priorizationButton.GetComponent<Button>().IsInteractable())
         {
             towerCanvas.GetComponent<Canvas>().enabled = false;
         }
         else
         {
-            if( !normalEnemyTagButton.GetComponent<Button>().IsInteractable() && isPriorizationCanvasChanged)
+            if (!normalEnemyTagButton.GetComponent<Button>().IsInteractable() && isPriorizationCanvasChanged)
             {
                 towerCanvas.GetComponent<Canvas>().enabled = false;
             }
         }
+    }
+
+    private void PlatformOnPointerExit()
+    {
+        towerCanvas.GetComponent<Canvas>().enabled = false;
     }
 
     public void PriorizationButton() 

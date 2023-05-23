@@ -841,7 +841,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4095975790818637870}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
   m_Camera: {fileID: 0}
@@ -1427,7 +1427,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerNameTextPanel: {fileID: 8769353159603218965}
   upgradeButton: {fileID: 3528483528344323101}
+  priorizationButton: {fileID: 0}
+  normalEnemyTagButton: {fileID: 0}
+  fastEnemyTagButton: {fileID: 0}
   mainCamera: {fileID: 0}
+  priorizationCanvas: {fileID: 0}
   towerTag: 
 --- !u!114 &3652085471747441519
 MonoBehaviour:
