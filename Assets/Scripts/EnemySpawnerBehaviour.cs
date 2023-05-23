@@ -14,17 +14,18 @@ public class EnemySpawnerBehaviour : MonoBehaviour
     [SerializeField] private GameObject cityHall;
     private Transform[] waypoints;
     [SerializeField] private float cooldownTime;
-
     private int remainningSpawns;
     [SerializeField] private int totalEnemySpawns = 6;
+    [SerializeField] private int totalEnemiesIncrementPerLevel = 10;
     [SerializeField] private float normalEnemyProbability = 0.5f;
     private int enemyWaveQuantity = 3;
     [SerializeField] private int currentEnemyWave = 1;
     [SerializeField] private List<GameObject> aliveEnemies;
     [SerializeField] private GameObject fireballBonusPrefab;
-    [SerializeField] private String groundTag = "Ground";
+    [SerializeField] private string groundTag = "Ground";
     [SerializeField] private float boundsOffset = 1.5f;
     private bool isBonusAlive = false;
+    [SerializeField] private bool defenseTurnOn = false;
 
     private GameLogic game;
 
@@ -43,15 +44,23 @@ public class EnemySpawnerBehaviour : MonoBehaviour
 
     private void Update()
     {
-        if (IsEnemyWaveDead())
-        {
-            StartCoroutine(StartEnemyWave());            
-        }
-        if (!isBonusAlive && GameLogic.GameInstance.FireballSpells == 0)
-        {
-            SpawnBonus();
-        }
+        StartLevel();
+    }
 
+    private void StartLevel()
+    {
+        if (defenseTurnOn) 
+        {
+            if (IsEnemyWaveDead())
+            {
+                StartCoroutine(StartEnemyWave());
+            }
+            if (!isBonusAlive && GameLogic.GameInstance.FireballSpells == 0)
+            {
+                SpawnBonus();
+            }
+        }
+        
     }
 
     private IEnumerator StartEnemyWave()
@@ -64,7 +73,6 @@ public class EnemySpawnerBehaviour : MonoBehaviour
             for (int i = 0; i < enemiesPerWave; i++)
             {
                 float random = UnityEngine.Random.value;
-                Debug.Log("Random float: "+random);
                 if (random < normalEnemyProbability)
                 {
                     SpawnEnemy(normalEnemyPrefab);
@@ -79,7 +87,24 @@ public class EnemySpawnerBehaviour : MonoBehaviour
             Debug.Log(enemiesPerWave + " enemies in this wave, " + remainningSpawns + " enemies remainning");
             currentEnemyWave++;
         }
+        else if (currentEnemyWave > enemyWaveQuantity && IsEnemyWaveDead())
+        {
+            PrepareNextLevel();
+        }
     }
+
+    private void PrepareNextLevel()
+    {
+        if (GameLogic.GameInstance.Turn == GameLogic.TurnPhase.Defense)
+        {
+            Debug.Log("Level " + GameLogic.GameInstance.TurnNumber + " surpassed!");
+            GameLogic.GameInstance.PassTurn();
+            currentEnemyWave = 1;
+            totalEnemySpawns += totalEnemiesIncrementPerLevel * GameLogic.GameInstance.TurnNumber;
+            remainningSpawns = totalEnemySpawns;
+        }
+    }
+
     private bool IsEnemyWaveDead() 
     {
         if (aliveEnemies.Count == 0)
@@ -123,7 +148,7 @@ public class EnemySpawnerBehaviour : MonoBehaviour
         remainningSpawns--;
         aliveEnemies.Add(newEnemy);
     }
-    public void KillEnemy(GameObject enemy)
+    public void RemoveEnemyFromWave(GameObject enemy)
     {
         aliveEnemies.Remove(enemy);
     }
@@ -162,6 +187,14 @@ public class EnemySpawnerBehaviour : MonoBehaviour
         set
         {
             isBonusAlive = value;
+        }
+    }
+
+    public bool DefenseTurnOn
+    {
+        set
+        {
+            defenseTurnOn = value;
         }
     }
 }

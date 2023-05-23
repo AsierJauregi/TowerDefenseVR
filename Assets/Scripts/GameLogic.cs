@@ -57,13 +57,16 @@ public class GameLogic : MonoBehaviour
         {
             turnPhase = TurnPhase.Defense;
             enemySpawner.GetComponent<EnemySpawnerBehaviour>().enabled = true;
+            enemySpawner.GetComponent<EnemySpawnerBehaviour>().DefenseTurnOn = true;
             Debug.Log("Defense Turn Starting!");
         }
-        else
+        else if(turnPhase == TurnPhase.Defense)
         {
             turnPhase = TurnPhase.Building;
-            Debug.Log("Building Turn");
-            turnNumber++; 
+            turnNumber++;
+            enemySpawner.GetComponent<EnemySpawnerBehaviour>().DefenseTurnOn = false;
+            Debug.Log("Level " + turnNumber + "  starting -- Building Turn");
+
         }
     }
     

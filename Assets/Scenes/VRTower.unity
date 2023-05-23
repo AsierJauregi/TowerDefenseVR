@@ -887,11 +887,14 @@ MonoBehaviour:
   cityHall: {fileID: 7552710786613754777}
   cooldownTime: 1
   totalEnemySpawns: 30
+  totalEnemiesIncrementPerLevel: 10
+  normalEnemyProbability: 0.5
   currentEnemyWave: 1
   aliveEnemies: []
   fireballBonusPrefab: {fileID: 4543937675112411467, guid: c300b7471488d5a4196c0ac2e41e57da, type: 3}
   groundTag: Ground
   boundsOffset: 1.5
+  defenseTurnOn: 0
 --- !u!1 &479688478
 GameObject:
   m_ObjectHideFlags: 0
@@ -1905,7 +1908,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1107983149513002714, guid: c419fd01153a75046b28707b21223f1b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.11
+      value: -3.57
       objectReference: {fileID: 0}
     - target: {fileID: 1107983149513002714, guid: c419fd01153a75046b28707b21223f1b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1913,23 +1916,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1107983149513002714, guid: c419fd01153a75046b28707b21223f1b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.55
+      value: 14.43
       objectReference: {fileID: 0}
     - target: {fileID: 1107983149513002714, guid: c419fd01153a75046b28707b21223f1b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.707008
+      value: 0.71826893
       objectReference: {fileID: 0}
     - target: {fileID: 1107983149513002714, guid: c419fd01153a75046b28707b21223f1b, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1107983149513002714, guid: c419fd01153a75046b28707b21223f1b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.70720553
+      value: 0.6957657
       objectReference: {fileID: 0}
     - target: {fileID: 1107983149513002714, guid: c419fd01153a75046b28707b21223f1b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1107983149513002714, guid: c419fd01153a75046b28707b21223f1b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1937,7 +1940,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1107983149513002714, guid: c419fd01153a75046b28707b21223f1b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -90.016
+      value: 88.177
       objectReference: {fileID: 0}
     - target: {fileID: 1107983149513002714, guid: c419fd01153a75046b28707b21223f1b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z

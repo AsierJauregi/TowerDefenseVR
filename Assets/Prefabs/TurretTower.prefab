@@ -300,9 +300,9 @@ MonoBehaviour:
   aimedEnemies: []
   aimedEnemy: {fileID: 0}
   canonBall: {fileID: 8544242848317257919, guid: fec61954e6aa16d4994588ffd344ba8c, type: 3}
-  shootingForce: 150
+  shootingForce: 200
   firePower: 25
-  cooldownTime: 0.5
+  cooldownTime: 1
   rotationSpeed: 20
   preferredTargetTag: FastEnemy
 --- !u!1 &1129079268780755732
