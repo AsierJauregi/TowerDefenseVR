@@ -46,9 +46,15 @@ public class TowerUI : MonoBehaviour, IPointerExitHandler
         constraintSource.weight = 1f;
         lookAtConstraint.AddSource(constraintSource);
         lookAtConstraint.constraintActive = true;
-        towerCanvas.GetComponent<Canvas>().enabled = false;
-        if(towerTag == turretTag) priorizationCanvas.GetComponent<Canvas>().enabled = false;
+        DisableUI();
     }
+
+    public void DisableUI()
+    {
+        towerCanvas.GetComponent<Canvas>().enabled = false;
+        if (towerTag == turretTag) priorizationCanvas.GetComponent<Canvas>().enabled = false;
+    }
+
     public void UpdateNameText()
     {
         GetTowerLevel();

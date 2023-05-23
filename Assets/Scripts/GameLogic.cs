@@ -7,6 +7,8 @@ public class GameLogic : MonoBehaviour
 {
     private const string spawnerName = "EnemySpawner";
     private const string interactionManagerName = "Interaction Manager";
+    private const string turretTag = "Tower";
+    private const string platformTag = "PlatformTower";
     private static GameLogic gameInstance;
 
     public enum TurnPhase { Building, Defense } //Each turn consists of a first building phase and then a defense phase
@@ -58,6 +60,7 @@ public class GameLogic : MonoBehaviour
             turnPhase = TurnPhase.Defense;
             enemySpawner.GetComponent<EnemySpawnerBehaviour>().enabled = true;
             enemySpawner.GetComponent<EnemySpawnerBehaviour>().DefenseTurnOn = true;
+            DisableUIinAllTowers();
             Debug.Log("Defense Turn Starting!");
         }
         else if(turnPhase == TurnPhase.Defense)
@@ -69,7 +72,21 @@ public class GameLogic : MonoBehaviour
 
         }
     }
-    
+
+    private static void DisableUIinAllTowers()
+    {
+        GameObject[] turrets = GameObject.FindGameObjectsWithTag(turretTag);
+        if (turrets.Length > 0)
+        {
+            foreach (GameObject turret in turrets)
+            {
+                turret.GetComponentInChildren<TowerUI>().DisableUI();
+            }
+        }
+        GameObject platform = GameObject.FindGameObjectWithTag(platformTag);
+        if (platform != null) platform.GetComponentInChildren<TowerUI>().DisableUI();
+    }
+
     public void GetCoins(int coinQuantity)
     {
         coins += coinQuantity;
