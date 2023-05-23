@@ -2781,7 +2781,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1860717518 stripped
 GameObject:
@@ -2837,6 +2837,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: de24b2f8aaf1f92428dd879866ca913d, type: 2}
   - {fileID: 2100000, guid: e97a1998f0ab81a4792187c005cd9bdd, type: 2}
   mainCamera: {fileID: 1360561208}
+  leftController: {fileID: 0}
   rightController: {fileID: 1692747748}
   buildingLayer: Path
   boundsOffset: 2.09
@@ -3066,7 +3067,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1764906708211026132, guid: 90ea1013693eaa047ac4703d880372b4, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1764906708211026132, guid: 90ea1013693eaa047ac4703d880372b4, type: 3}
       propertyPath: m_LocalPosition.x
