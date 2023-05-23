@@ -86,7 +86,14 @@ public class TurretDefender : MonoBehaviour
             aimedEnemies.Add(other.gameObject);
             if (aimedEnemies.Count > 1)
             {
-                ChooseTarget();
+                if(aimedEnemy != null) 
+                {
+                    if(aimedEnemy.tag != preferredTargetTag) ChooseTarget();
+                }
+                else
+                {
+                    ChooseTarget();
+                }
             }
             else
             {
@@ -133,6 +140,7 @@ public class TurretDefender : MonoBehaviour
                 if (enemy.tag == preferredTargetTag && enemy != null)
                 {
                     aimedEnemy = enemy;
+                    break; 
                 }
             }
             if (aimedEnemy == null)
