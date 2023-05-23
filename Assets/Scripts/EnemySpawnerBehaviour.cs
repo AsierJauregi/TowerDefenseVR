@@ -9,6 +9,7 @@ public class EnemySpawnerBehaviour : MonoBehaviour
     private float firstWaveEnemyDistribution = 6;
     private float secondWaveEnemyDistribution = 3;
     [SerializeField] private GameObject normalEnemyPrefab;
+    [SerializeField] private GameObject fastEnemyPrefab;
     [SerializeField] private Vector3 spawnOffset;
     [SerializeField] private GameObject cityHall;
     private Transform[] waypoints;
@@ -16,6 +17,7 @@ public class EnemySpawnerBehaviour : MonoBehaviour
 
     private int remainningSpawns;
     [SerializeField] private int totalEnemySpawns = 6;
+    [SerializeField] private float normalEnemyProbability = 0.5f;
     private int enemyWaveQuantity = 3;
     [SerializeField] private int currentEnemyWave = 1;
     [SerializeField] private List<GameObject> aliveEnemies;
@@ -61,7 +63,17 @@ public class EnemySpawnerBehaviour : MonoBehaviour
             
             for (int i = 0; i < enemiesPerWave; i++)
             {
-                SpawnEnemy(normalEnemyPrefab);
+                float random = UnityEngine.Random.value;
+                Debug.Log("Random float: "+random);
+                if (random < normalEnemyProbability)
+                {
+                    SpawnEnemy(normalEnemyPrefab);
+                }
+                else
+                {
+                    SpawnEnemy(fastEnemyPrefab);
+                }
+                
                 yield return new WaitForSeconds(1f);
             }
             Debug.Log(enemiesPerWave + " enemies in this wave, " + remainningSpawns + " enemies remainning");
