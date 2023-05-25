@@ -12,7 +12,7 @@ public class PlatformTowerBehaviour : MonoBehaviour
     [SerializeField] private GameObject leftController;
     [SerializeField] private string playerTag = "Player";
     private bool isFireballAlive = false;
-    private Camera mainCamera;
+    [SerializeField] private Camera mainCamera;
     private int towerLevel = 1;
     private int maxTowerLevel = 3;
     private int buildedTurn = 1;
@@ -47,8 +47,10 @@ public class PlatformTowerBehaviour : MonoBehaviour
     private void SpawnFireball()
     {
         isFireballAlive = true;
-        xrOrigin.transform.rotation = Quaternion.EulerAngles(xrOrigin.transform.rotation.x, mainCamera.transform.rotation.y, xrOrigin.transform.rotation.z);
-        GameObject newFireball = Instantiate(fireballPrefab, xrOrigin.transform.position + fireballSpawnOffset, xrOrigin.transform.rotation);
+        //xrOrigin.transform.rotation = Quaternion.Euler(xrOrigin.transform.rotation.eulerAngles.x, mainCamera.transform.rotation.eulerAngles.y, xrOrigin.transform.rotation.eulerAngles.z);
+        Quaternion rotation = Quaternion.Euler(xrOrigin.transform.rotation.eulerAngles.x, mainCamera.transform.rotation.eulerAngles.y, xrOrigin.transform.rotation.eulerAngles.z);
+        Vector3 position = xrOrigin.transform.position;
+        GameObject newFireball = Instantiate(fireballPrefab, position + Quaternion.Euler(0f, rotation.eulerAngles.y, 0f) * fireballSpawnOffset, rotation);
         newFireball.GetComponent<FireballBehaviour>().originPlatformTower = this.gameObject;
         newFireball.GetComponent<FireballBehaviour>().SpellQuantity = spellQuantity;
         GameLogic.GameInstance.UseFireballSpell();
