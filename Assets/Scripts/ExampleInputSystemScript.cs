@@ -40,6 +40,13 @@ public class ExampleInputSystemScript : MonoBehaviour
 
     }
 
+    private void OnDestroy()
+    {
+        buildReference.action.performed -= Build_performed;
+        letBuildReference.action.performed -= Let_Build;
+        endBuildingReference.action.performed -= BuildingTurnEnded;
+    }
+
     private void Update()
     {
         if (isBuilding)

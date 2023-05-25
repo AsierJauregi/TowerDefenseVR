@@ -23,6 +23,7 @@ public class TowerBuilder : MonoBehaviour
 
     [SerializeField] private GameObject leftController;
     [SerializeField] private GameObject rightController;
+    [SerializeField] private GameObject xrOrigin;
     private XRRayInteractor rayInteractor;
 
     [SerializeField] private string buildingLayer = "Path"; 
@@ -213,7 +214,7 @@ public class TowerBuilder : MonoBehaviour
     private void BuildPlatform(int towerCost, Vector3 towerPosition)
     {
         GameObject newPlatform = Instantiate(platformPrefab, towerPosition, Quaternion.identity);
-        newPlatform.GetComponent<PlatformTowerBehaviour>().XROrigin = GameObject.Find("XR Origin");
+        newPlatform.GetComponent<PlatformTowerBehaviour>().XROrigin = xrOrigin;
         newPlatform.GetComponent<PlatformTowerBehaviour>().MainCamera = mainCamera;
         newPlatform.GetComponent<PlatformTowerBehaviour>().TowerCost = towerCost;
         newPlatform.GetComponent<PlatformTowerBehaviour>().BuildedTurn = GameLogic.GameInstance.TurnNumber;

@@ -10,6 +10,7 @@ public class CityHall : MonoBehaviour
 
     [SerializeField] private GameObject healthBarUI;
     [SerializeField] private Slider slider;
+    [SerializeField] private Canvas gameOverCanvas;
 
     void Awake()
     {
@@ -28,13 +29,19 @@ public class CityHall : MonoBehaviour
         }
         if (health <= 0)
         {
-            Debug.Log("GAME OVER");
-            Destroy(this.gameObject);
+            GameOver();
         }
         if (health > maxHealth)
         {
             health = maxHealth;
         }
+    }
+
+    private void GameOver()
+    {
+        Debug.Log("GAME OVER");
+        gameOverCanvas.enabled = true;
+        Time.timeScale = 0;
     }
 
     float CalculateHealth()
