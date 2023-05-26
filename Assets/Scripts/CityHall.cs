@@ -10,7 +10,7 @@ public class CityHall : MonoBehaviour
 
     [SerializeField] private GameObject healthBarUI;
     [SerializeField] private Slider slider;
-    [SerializeField] private Canvas gameOverCanvas;
+    [SerializeField] private Canvas cameraCanvas;
 
     void Awake()
     {
@@ -40,7 +40,7 @@ public class CityHall : MonoBehaviour
     private void GameOver()
     {
         Debug.Log("GAME OVER");
-        gameOverCanvas.enabled = true;
+        cameraCanvas.GetComponentInChildren<GameOverUI>().EnableGameOverScreen();
         Time.timeScale = 0;
     }
 

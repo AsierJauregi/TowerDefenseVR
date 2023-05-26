@@ -8,6 +8,7 @@ public class GameLogic : MonoBehaviour
     private const string spawnerName = "EnemySpawner";
     private const string interactionManagerName = "Interaction Manager";
     private const string rightControllerCanvasName = "RightControllerCanvas";
+    private const string cameraCanvasName = "CameraCanvas";
     private const string turretTag = "Tower";
     private const string platformTag = "PlatformTower";
     private static GameLogic gameInstance;
@@ -22,7 +23,7 @@ public class GameLogic : MonoBehaviour
     [SerializeField] GameObject enemySpawner;
     [SerializeField] GameObject rightControllerCanvas;
     [SerializeField] GameObject interactionManager;
-    
+    [SerializeField] GameObject cameraCanvas;    
 
     public static GameLogic GameInstance
     {
@@ -53,6 +54,7 @@ public class GameLogic : MonoBehaviour
         interactionManager = GameObject.Find(interactionManagerName);
         interactionManager.GetComponent<ExampleInputSystemScript>().Game = gameInstance;
         rightControllerCanvas = GameObject.Find(rightControllerCanvasName);
+        StartCoroutine(cameraCanvas.GetComponentInChildren<TurnPhaseUI>().BuildingPhaseUI());
     }
 
     public void LoadGame()
@@ -66,6 +68,7 @@ public class GameLogic : MonoBehaviour
         if (turnPhase == TurnPhase.Building)
         {
             turnPhase = TurnPhase.Defense;
+            StartCoroutine(cameraCanvas.GetComponentInChildren<TurnPhaseUI>().DefensePhaseUI());
             enemySpawner.GetComponent<EnemySpawnerBehaviour>().enabled = true;
             enemySpawner.GetComponent<EnemySpawnerBehaviour>().DefenseTurnOn = true;
             DisableUIinAllTowers();
@@ -75,6 +78,7 @@ public class GameLogic : MonoBehaviour
         {
             turnPhase = TurnPhase.Building;
             turnNumber++;
+            StartCoroutine(cameraCanvas.GetComponentInChildren<TurnPhaseUI>().BuildingPhaseUI());
             enemySpawner.GetComponent<EnemySpawnerBehaviour>().DefenseTurnOn = false;
             Debug.Log("Level " + turnNumber + "  starting -- Building Turn");
 
