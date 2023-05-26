@@ -48,7 +48,7 @@ public class Enemy : MonoBehaviour
         {
             healthBarUI.SetActive(true);
         }
-        if (health <= 0)
+        if (health <= 0 || this.transform.position.y < -6)
         {
             StartCoroutine(Die());
         }
