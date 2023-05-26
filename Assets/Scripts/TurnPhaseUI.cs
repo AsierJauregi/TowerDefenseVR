@@ -9,14 +9,12 @@ public class TurnPhaseUI : MonoBehaviour
     [SerializeField] private Canvas cameraCanvas;
     [SerializeField] private TextMeshProUGUI buildingPhaseTMP;
     [SerializeField] private TextMeshProUGUI defensePhaseTMP;
-    private GameObject turnPhasePanel;
+    private Canvas turnPhaseCanvas;
+    [SerializeField] private GameObject background;
 
     private void Awake()
     {
-        turnPhasePanel = this.gameObject;
-        DeactivateTurnPhaseUI();
-        buildingPhaseTMP.enabled = false;
-        defensePhaseTMP.enabled = false;
+        turnPhaseCanvas = GetComponent<Canvas>();
     }
     public IEnumerator BuildingPhaseUI()
     {
@@ -41,20 +39,15 @@ public class TurnPhaseUI : MonoBehaviour
         if (!cameraCanvas.gameObject.activeSelf)
         {
             cameraCanvas.gameObject.SetActive(true);
-            cameraCanvas.GetComponent<Image>().enabled = false;
-        }
-        else if (cameraCanvas.GetComponent<Image>().enabled)
-        {
-            cameraCanvas.GetComponent<Image>().enabled = false;
         }
     }
     private void ActivateTurnPhaseUI()
     {
-        turnPhasePanel.GetComponent<Image>().enabled = true;
+        background.SetActive(true);
     }
     private void DeactivateTurnPhaseUI()
     {
-        turnPhasePanel.GetComponent<Image>().enabled = false;
+        background.SetActive(false);
         buildingPhaseTMP.enabled = false;
         defensePhaseTMP.enabled = false;
     }

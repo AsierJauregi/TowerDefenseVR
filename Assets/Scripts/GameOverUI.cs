@@ -6,22 +6,17 @@ using UnityEngine.UI;
 
 public class GameOverUI : MonoBehaviour
 {
-    [SerializeField] private Canvas cameraCanvas;
-    private GameObject gameOverPanel;
+    private Canvas gameOverCanvas;
     
     private void Awake()
     {
-        cameraCanvas.gameObject.SetActive(false);
-        cameraCanvas.GetComponent<Image>().enabled = false;
-        gameOverPanel = this.gameObject;
-        gameOverPanel.SetActive(false);
+        gameOverCanvas = GetComponent<Canvas>();
+        gameOverCanvas.enabled = false;
     }
 
     public void EnableGameOverScreen()
     {
-        cameraCanvas.gameObject.SetActive(true);
-        cameraCanvas.GetComponent<Image>().enabled = true;
-        gameOverPanel.SetActive(true);
+        gameOverCanvas.enabled = true;
     }
     public void Restart()
     {
