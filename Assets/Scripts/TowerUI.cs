@@ -106,7 +106,10 @@ public class TowerUI : MonoBehaviour, IPointerExitHandler
         }
         else
         {
-            towerCanvas.GetComponent<Canvas>().enabled = true;
+            if(GameLogic.GameInstance.Turn == GameLogic.TurnPhase.Building)
+            {
+                towerCanvas.GetComponent<Canvas>().enabled = true;
+            }
         }
     }
 
