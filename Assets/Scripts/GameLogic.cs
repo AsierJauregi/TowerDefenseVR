@@ -16,7 +16,7 @@ public class GameLogic : MonoBehaviour
     public enum TurnPhase { Building, Defense } //Each turn consists of a first building phase and then a defense phase
     private TurnPhase turnPhase = TurnPhase.Building;
     private int turnNumber = 1; //Once both phases have elapsed we go into the next turn
-    [SerializeField] private const int startingCoins = 100;
+    [SerializeField] private int startingCoins = 100;
     private int coins;
     private int fireballSpells = 0;
 

@@ -111,6 +111,7 @@ public class ExampleInputSystemScript : MonoBehaviour
             isBuilding = true;
             leftController.GetComponent<TowerBuilder>().enabled = true;
             radialMenu.SetActive(true);
+            radialMenu.SetActive(true);
         }
         else
         {
