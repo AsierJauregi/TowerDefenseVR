@@ -91,6 +91,7 @@ public class Enemy : MonoBehaviour
         healthBarUI.SetActive(false);
         spawner.GetComponent<EnemySpawnerBehaviour>().RemoveEnemyFromWave(this.gameObject);
         game.GetCoins(coins);
+        GameLogic.GameInstance.ReportEnemyKilled();
         animator.SetTrigger("Die");
         yield return new WaitForSeconds(1.2f);
         GameObject[] turrets = GameObject.FindGameObjectsWithTag("Tower");

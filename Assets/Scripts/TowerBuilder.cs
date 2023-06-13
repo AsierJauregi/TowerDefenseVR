@@ -220,6 +220,7 @@ public class TowerBuilder : MonoBehaviour
         newPlatform.GetComponent<PlatformTowerBehaviour>().BuildedTurn = GameLogic.GameInstance.TurnNumber;
         newPlatform.GetComponent<PlatformTowerBehaviour>().LeftController = leftController;
         platformIsBuilt = true;
+        GameLogic.GameInstance.ReportTowerPlaced();
     }
 
     private void BuildTurret(int towerCost, Vector3 towerPosition)
@@ -228,6 +229,7 @@ public class TowerBuilder : MonoBehaviour
         newTurret.GetComponentInChildren<TowerUI>().MainCamera = mainCamera;
         newTurret.GetComponent<TurretDefender>().TowerCost = towerCost;
         newTurret.GetComponent<TurretDefender>().BuildedTurn = GameLogic.GameInstance.TurnNumber;
+        GameLogic.GameInstance.ReportTowerPlaced();
     }
     
     public void PlatformUnbuilt()

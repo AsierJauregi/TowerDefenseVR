@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,9 @@ public class GameLogic : MonoBehaviour
     [SerializeField] private int startingCoins = 100;
     private int coins;
     private int fireballSpells = 0;
+    private int killedEnemies = 0;
+    private int usedFireballSpells = 0;
+    private int totalTurretsPlaced = 0;
 
     [SerializeField] GameObject enemySpawner;
     [SerializeField] GameObject rightControllerCanvas;
@@ -49,6 +53,9 @@ public class GameLogic : MonoBehaviour
         turnNumber = 1;
         turnPhase = TurnPhase.Building;
         coins = startingCoins;
+        killedEnemies = 0;
+        usedFireballSpells = 0;
+        totalTurretsPlaced = 0;
         enemySpawner = GameObject.Find(spawnerName);
         enemySpawner.GetComponent<EnemySpawnerBehaviour>().Game = gameInstance;
         interactionManager = GameObject.Find(interactionManagerName);
@@ -119,7 +126,26 @@ public class GameLogic : MonoBehaviour
     public void UseFireballSpell()
     {
         fireballSpells--;
+        usedFireballSpells++;
         rightControllerCanvas.GetComponent<RightControllerUIBehaviour>().UpdateFireballSpells();
+    }
+    public void ReportEnemyKilled()
+    {
+        killedEnemies++;
+    }
+    public void ReportTowerPlaced()
+    {
+        totalTurretsPlaced++;
+    }
+    public void ReportGameData()
+    {
+        string playerName = Guid.NewGuid().ToString(); 
+        Debug.Log("Playeer id: "+ playerName +", killed enemies: " + killedEnemies + ", coins left: " + coins + ", turns survived: " + turnNumber + ", turrets placed: " + totalTurretsPlaced);
+        PlayerData playerData = new PlayerData();
+        playerData.PlayerDataInitialization(playerName, killedEnemies, coins, turnNumber, totalTurretsPlaced);
+        string jsonData = JsonUtility.ToJson(playerData);
+        Debug.Log(jsonData);
+        StartCoroutine(playerData.SaveData(jsonData));
     }
     public int Coins
     {

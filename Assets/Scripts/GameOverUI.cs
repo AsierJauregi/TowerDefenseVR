@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class GameOverUI : MonoBehaviour
 {
     private Canvas gameOverCanvas;
+    private bool dataReported = false;
     
     private void Awake()
     {
@@ -17,6 +18,11 @@ public class GameOverUI : MonoBehaviour
     public void EnableGameOverScreen()
     {
         gameOverCanvas.enabled = true;
+        if (!dataReported)
+        {
+            GameLogic.GameInstance.ReportGameData();
+            dataReported = true;
+        }
     }
     public void Restart()
     {
