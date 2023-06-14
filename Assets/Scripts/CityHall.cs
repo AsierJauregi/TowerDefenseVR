@@ -39,7 +39,6 @@ public class CityHall : MonoBehaviour
 
     private void GameOver()
     {
-        Debug.Log("GAME OVER");
         cameraCanvas.GetComponentInChildren<GameOverUI>().EnableGameOverScreen();
         Time.timeScale = 0;
     }

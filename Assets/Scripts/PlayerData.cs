@@ -12,14 +12,16 @@ public class PlayerData : MonoBehaviour
     public int remainingCoins;
     public int survivedTurns;
     public int placedTurrets;
+    public int usedFireballs;
 
-    public void PlayerDataInitialization(string playerName, int enemiesKilled, int remainingCoins, int survivedTurns, int placedTurrets)
+    public void PlayerDataInitialization(string playerName, int enemiesKilled, int remainingCoins, int survivedTurns, int placedTurrets, int usedFireballs)
     {
         this.playerName = playerName;
         this.enemiesKilled = enemiesKilled;
         this.remainingCoins = remainingCoins;
         this.survivedTurns = survivedTurns;
         this.placedTurrets = placedTurrets;
+        this.usedFireballs = usedFireballs;
     }
 
     public IEnumerator SaveData(string jsonData)
@@ -36,11 +38,11 @@ public class PlayerData : MonoBehaviour
 
             if (www.result != UnityWebRequest.Result.Success)
             {
-                Debug.LogError("Error al guardar los datos: " + www.error);
+                Debug.LogError("Error saving data: " + www.error);
             }
             else
             {
-                Debug.Log("Datos guardados exitosamente.");
+                Debug.Log("Data saved successfully.");
             }
         }
     }

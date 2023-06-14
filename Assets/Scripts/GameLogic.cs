@@ -140,9 +140,8 @@ public class GameLogic : MonoBehaviour
     public void ReportGameData()
     {
         string playerName = Guid.NewGuid().ToString(); 
-        Debug.Log("Playeer id: "+ playerName +", killed enemies: " + killedEnemies + ", coins left: " + coins + ", turns survived: " + turnNumber + ", turrets placed: " + totalTurretsPlaced);
         PlayerData playerData = new PlayerData();
-        playerData.PlayerDataInitialization(playerName, killedEnemies, coins, turnNumber, totalTurretsPlaced);
+        playerData.PlayerDataInitialization(playerName, killedEnemies, coins, turnNumber--, totalTurretsPlaced, usedFireballSpells);
         string jsonData = JsonUtility.ToJson(playerData);
         Debug.Log(jsonData);
         StartCoroutine(playerData.SaveData(jsonData));
