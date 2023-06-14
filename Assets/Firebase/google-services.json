@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "897456610725",
+    "firebase_url": "https://tower-defense-vr-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "tower-defense-vr",
+    "storage_bucket": "tower-defense-vr.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:897456610725:android:04390f8379c16fa2801c4c",
+        "android_client_info": {
+          "package_name": "com.Asier.TowerDefenseVR"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "897456610725-94ae260jqvqt2audh8t2ccou2iq05lai.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYs739sQif80sDoVg-irOhz2BbMKEFF2M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "897456610725-94ae260jqvqt2audh8t2ccou2iq05lai.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
