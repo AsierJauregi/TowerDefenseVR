@@ -8,8 +8,8 @@ public class EnemySpawnerBehaviour : MonoBehaviour
     private const float groundSurfaceY = 0.856959f;
     private float firstWaveEnemyDistribution = 6;
     private float secondWaveEnemyDistribution = 3;
-    [SerializeField] private GameObject normalEnemyPrefab;
-    [SerializeField] private GameObject fastEnemyPrefab;
+    [SerializeField] private GameObject redDemon;
+    [SerializeField] private GameObject blueCyclops;
     [SerializeField] private Vector3 spawnOffset;
     [SerializeField] private GameObject cityHall;
     private Transform[] waypoints;
@@ -17,7 +17,7 @@ public class EnemySpawnerBehaviour : MonoBehaviour
     private int remainningSpawns;
     [SerializeField] private int totalEnemySpawns = 6;
     [SerializeField] private int totalEnemiesIncrementPerLevel = 10;
-    [SerializeField] private float normalEnemyProbability = 0.5f;
+    [SerializeField] private float redDemonProbability = 0.5f;
     private int enemyWaveQuantity = 3;
     [SerializeField] private int currentEnemyWave = 1;
     [SerializeField] private List<GameObject> aliveEnemies;
@@ -26,6 +26,8 @@ public class EnemySpawnerBehaviour : MonoBehaviour
     [SerializeField] private float boundsOffset = 1.5f;
     private bool isBonusAlive = false;
     [SerializeField] private bool defenseTurnOn = false;
+
+    [SerializeField] private GameObject closeController;
 
     private GameLogic game;
 
@@ -73,13 +75,13 @@ public class EnemySpawnerBehaviour : MonoBehaviour
             for (int i = 0; i < enemiesPerWave; i++)
             {
                 float random = UnityEngine.Random.value;
-                if (random < normalEnemyProbability)
+                if (random < redDemonProbability)
                 {
-                    SpawnEnemy(normalEnemyPrefab);
+                    SpawnEnemy(redDemon);
                 }
                 else
                 {
-                    SpawnEnemy(fastEnemyPrefab);
+                    SpawnEnemy(blueCyclops);
                 }
                 
                 yield return new WaitForSeconds(1f);
@@ -169,6 +171,7 @@ public class EnemySpawnerBehaviour : MonoBehaviour
         randomPosition.y = groundSurfaceY;
         GameObject fireballBonus = Instantiate(fireballBonusPrefab, randomPosition, Quaternion.identity);
         fireballBonus.GetComponent<BonusBehaviour>().enemySpawner = this.gameObject;
+        fireballBonus.GetComponent<BonusBehaviour>().closeController = closeController;
     }
 
     public GameLogic Game

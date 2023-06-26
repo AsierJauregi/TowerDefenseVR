@@ -8,7 +8,7 @@ public class GameLogic : MonoBehaviour
 {
     private const string spawnerName = "EnemySpawner";
     private const string interactionManagerName = "Interaction Manager";
-    private const string rightControllerCanvasName = "RightControllerCanvas";
+    private const string rightControllerCanvasName = "Right Controller Canvas ";
     private const string cameraCanvasName = "CameraCanvas";
     private const string turretTag = "Tower";
     private const string platformTag = "PlatformTower";
@@ -23,6 +23,7 @@ public class GameLogic : MonoBehaviour
     private int killedEnemies = 0;
     private int usedFireballSpells = 0;
     private int totalTurretsPlaced = 0;
+    [SerializeField]private bool holdingFireball = false;
 
     [SerializeField] GameObject enemySpawner;
     [SerializeField] GameObject rightControllerCanvas;
@@ -59,7 +60,7 @@ public class GameLogic : MonoBehaviour
         enemySpawner = GameObject.Find(spawnerName);
         enemySpawner.GetComponent<EnemySpawnerBehaviour>().Game = gameInstance;
         interactionManager = GameObject.Find(interactionManagerName);
-        interactionManager.GetComponent<ExampleInputSystemScript>().Game = gameInstance;
+        interactionManager.GetComponent<InputSystemScript>().Game = gameInstance;
         rightControllerCanvas = GameObject.Find(rightControllerCanvasName);
         StartCoroutine(cameraCanvas.GetComponentInChildren<TurnPhaseUI>().BuildingPhaseUI());
     }
@@ -173,6 +174,18 @@ public class GameLogic : MonoBehaviour
         get
         {
             return turnNumber;
+        }
+    }
+
+    public bool HoldingFireball
+    {
+        set
+        {
+            holdingFireball = value;
+        }
+        get
+        {
+            return holdingFireball;
         }
     }
 }

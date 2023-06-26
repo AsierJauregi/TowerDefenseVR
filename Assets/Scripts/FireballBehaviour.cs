@@ -39,10 +39,25 @@ public class FireballBehaviour : MonoBehaviour
         {
             Debug.Log("Fireball caught");
             fireballCaught = true;
+            GameLogic.GameInstance.HoldingFireball = false;
             parentBonus.GetComponent<BonusBehaviour>().FireballGrabbed();
             GameLogic.GameInstance.GetFireballSpells(spellQuantity);
             Destroy(this.gameObject);
         }
+    }
+
+    public void HoldingFireball(bool boolValue)
+    {
+        if (!GameLogic.GameInstance.HoldingFireball)
+        {
+            GameLogic.GameInstance.HoldingFireball = boolValue;
+        }   
+    }
+
+    public void RealeasingFireball()
+    {
+        Debug.Log("Release");
+        GameLogic.GameInstance.HoldingFireball = false;
     }
 
     public bool FireballCaught

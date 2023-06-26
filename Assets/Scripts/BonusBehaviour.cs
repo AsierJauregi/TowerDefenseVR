@@ -8,6 +8,7 @@ public class BonusBehaviour : MonoBehaviour
     [SerializeField] private float decrement = 0.03f;
     [SerializeField] private GameObject fireballAura;
     public GameObject enemySpawner;
+    public GameObject closeController;
 
     private void Update()
     {
@@ -34,7 +35,8 @@ public class BonusBehaviour : MonoBehaviour
     public void FireballGrabbed()
     {
         fireballGrabbed = true;
-
+        closeController.GetComponentInParent<ChangeControllers>().ChangeLeftController2Far();
+        closeController.GetComponentInParent<ChangeControllers>().ChangeRightController2Far();
     }
 
 }

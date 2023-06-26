@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5419250370408731291}
   m_Layer: 8
   m_Name: Fireball
-  m_TagString: Untagged
+  m_TagString: Fireball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -121,6 +121,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5419250370408731291}
+        m_TargetAssemblyTypeName: FireballBehaviour, Assembly-CSharp
+        m_MethodName: HoldingFireball
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
       m_Calls:
@@ -128,6 +140,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.Rigidbody, UnityEngine
         m_MethodName: set_isKinematic
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5419250370408731291}
+        m_TargetAssemblyTypeName: FireballBehaviour, Assembly-CSharp
+        m_MethodName: RealeasingFireball
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -235,6 +259,7 @@ MonoBehaviour:
   fireExplosion: {fileID: 131164, guid: 3c5f4e32698bdb04eaed647f60310510, type: 3}
   parentBonus: {fileID: 0}
   originPlatformTower: {fileID: 0}
+  spellQuantity: 3
 --- !u!1 &5753231710816190008
 GameObject:
   m_ObjectHideFlags: 0

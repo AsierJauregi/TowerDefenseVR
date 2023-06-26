@@ -81,7 +81,7 @@ public class TowerBuilder : MonoBehaviour
                 ShowPlatformPrevisualization(hit);
             }
             currentTowerPrevisualization.GetComponent<PrevisualizationCollision>().leftController = this.gameObject;
-            rightController.GetComponentInChildren<RightControllerUIBehaviour>().EnableTowerCostText(true);
+            rightController.transform.parent.GetComponentInChildren<RightControllerUIBehaviour>().EnableTowerCostText(true);
 
             isPrevisualizing = true;
         }
@@ -96,8 +96,8 @@ public class TowerBuilder : MonoBehaviour
         currentTowerPrevisualization = Instantiate(turretPrevisualizationPrefab, hit.point, Quaternion.identity);
         isPrevisualizationTurret = true;
         isPrevisualizationPlatform = false;
-        rightController.GetComponentInChildren<RightControllerUIBehaviour>().TowerCost = buildingTurretCost;
-        rightController.GetComponentInChildren<RightControllerUIBehaviour>().UpdateTowerCostText();
+        rightController.transform.parent.GetComponentInChildren<RightControllerUIBehaviour>().TowerCost = buildingTurretCost;
+        rightController.transform.parent.GetComponentInChildren<RightControllerUIBehaviour>().UpdateTowerCostText();
     }
 
     private void ShowPlatformPrevisualization(RaycastHit hit)
@@ -106,15 +106,15 @@ public class TowerBuilder : MonoBehaviour
         currentTowerPrevisualization = Instantiate(platformPrevisualizationPrefab, hit.point, Quaternion.identity);
         isPrevisualizationTurret = false;
         isPrevisualizationPlatform = true;
-        rightController.GetComponentInChildren<RightControllerUIBehaviour>().TowerCost = buildingPlatformCost;
-        rightController.GetComponentInChildren<RightControllerUIBehaviour>().UpdateTowerCostText();
+        rightController.transform.parent.GetComponentInChildren<RightControllerUIBehaviour>().TowerCost = buildingPlatformCost;
+        rightController.transform.parent.GetComponentInChildren<RightControllerUIBehaviour>().UpdateTowerCostText();
     }
 
     public void StopPrevisualization()
     {
         Destroy(currentTowerPrevisualization);
         isPrevisualizing = false;
-        rightController.GetComponentInChildren<RightControllerUIBehaviour>().EnableTowerCostText(false);
+        rightController.transform.parent.GetComponentInChildren<RightControllerUIBehaviour>().EnableTowerCostText(false);
     }
 
     private bool IsPrevisualizationGrounded(RaycastHit hit)
