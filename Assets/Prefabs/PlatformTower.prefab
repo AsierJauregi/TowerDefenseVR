@@ -812,7 +812,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &530430808405883907
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1304,6 +1304,7 @@ MonoBehaviour:
   fireballPrefab: {fileID: 5684462765057629749, guid: aefcc392191115c48a277b1631ae2591, type: 3}
   leftController: {fileID: 0}
   playerTag: Player
+  mainCamera: {fileID: 0}
 --- !u!65 &6750327037388451940
 BoxCollider:
   m_ObjectHideFlags: 0
