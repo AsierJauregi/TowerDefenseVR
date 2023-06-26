@@ -172,6 +172,7 @@ public class EnemySpawnerBehaviour : MonoBehaviour
         GameObject fireballBonus = Instantiate(fireballBonusPrefab, randomPosition, Quaternion.identity);
         fireballBonus.GetComponent<BonusBehaviour>().enemySpawner = this.gameObject;
         fireballBonus.GetComponent<BonusBehaviour>().closeController = closeController;
+
     }
 
     public GameLogic Game

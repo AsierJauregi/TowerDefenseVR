@@ -17,12 +17,12 @@ public class PlatformTowerBehaviour : MonoBehaviour
     private int maxTowerLevel = 3;
     private int buildedTurn = 1;
     private int towerCost;
-    private int spellQuantity = 1;
     private int levelUpCost = 20;
 
     private void Start()
     {
         buildedTurn = GameLogic.GameInstance.TurnNumber;
+        GameLogic.GameInstance.PlatformLevel = 1;
     }
     public void TransportPlayer()
     {
@@ -52,7 +52,6 @@ public class PlatformTowerBehaviour : MonoBehaviour
         Vector3 position = xrOrigin.transform.position;
         GameObject newFireball = Instantiate(fireballPrefab, position + Quaternion.Euler(0f, rotation.eulerAngles.y, 0f) * fireballSpawnOffset, rotation);
         newFireball.GetComponent<FireballBehaviour>().originPlatformTower = this.gameObject;
-        newFireball.GetComponent<FireballBehaviour>().SpellQuantity = spellQuantity;
         GameLogic.GameInstance.UseFireballSpell();
     }
     public void LevelUpTower()
@@ -69,7 +68,7 @@ public class PlatformTowerBehaviour : MonoBehaviour
         {
             GameLogic.GameInstance.SpendCoins(levelUpCost);
             towerLevel++;
-            spellQuantity++;
+            GameLogic.GameInstance.PlatformLevel++;
             levelUpCost += levelUpCostIncrement;
             GetComponentInChildren<TowerUI>().UpdateNameText();
             
@@ -83,6 +82,7 @@ public class PlatformTowerBehaviour : MonoBehaviour
         {
             ReturnCoinsForTower();
             leftController.GetComponent<TowerBuilder>().PlatformUnbuilt();
+            GameLogic.GameInstance.PlatformLevel = 0;
             Destroy(this.gameObject);
         }
     }

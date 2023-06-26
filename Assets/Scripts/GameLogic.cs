@@ -23,6 +23,7 @@ public class GameLogic : MonoBehaviour
     private int killedEnemies = 0;
     private int usedFireballSpells = 0;
     private int totalTurretsPlaced = 0;
+    private int platformLevel = 0;
     [SerializeField]private bool holdingFireball = false;
 
     [SerializeField] GameObject enemySpawner;
@@ -57,6 +58,7 @@ public class GameLogic : MonoBehaviour
         killedEnemies = 0;
         usedFireballSpells = 0;
         totalTurretsPlaced = 0;
+        platformLevel = 0;
         enemySpawner = GameObject.Find(spawnerName);
         enemySpawner.GetComponent<EnemySpawnerBehaviour>().Game = gameInstance;
         interactionManager = GameObject.Find(interactionManagerName);
@@ -119,9 +121,9 @@ public class GameLogic : MonoBehaviour
         rightControllerCanvas.GetComponent<RightControllerUIBehaviour>().UpdateCoins();
     }
 
-    public void GetFireballSpells(int spellQuantity)
+    public void GetFireballSpells()
     {
-        fireballSpells += spellQuantity;
+        fireballSpells += 1 + platformLevel;
         rightControllerCanvas.GetComponent<RightControllerUIBehaviour>().UpdateFireballSpells();
     }
     public void UseFireballSpell()
@@ -186,6 +188,18 @@ public class GameLogic : MonoBehaviour
         get
         {
             return holdingFireball;
+        }
+    }
+
+    public int PlatformLevel
+    {
+        set
+        {
+            platformLevel = value;
+        }
+        get
+        {
+            return platformLevel;
         }
     }
 }

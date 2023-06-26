@@ -14,8 +14,6 @@ public class FireballBehaviour : MonoBehaviour
     [SerializeField] private GameObject fireExplosion;
     [SerializeField] private GameObject parentBonus;
     public GameObject originPlatformTower;
-    
-    [SerializeField] private int spellQuantity = 1;
     private bool fireballCaught = false;
 
     private void OnCollisionEnter(Collision collision)
@@ -41,7 +39,7 @@ public class FireballBehaviour : MonoBehaviour
             fireballCaught = true;
             GameLogic.GameInstance.HoldingFireball = false;
             parentBonus.GetComponent<BonusBehaviour>().FireballGrabbed();
-            GameLogic.GameInstance.GetFireballSpells(spellQuantity);
+            GameLogic.GameInstance.GetFireballSpells();
             Destroy(this.gameObject);
         }
     }
@@ -65,13 +63,6 @@ public class FireballBehaviour : MonoBehaviour
         set
         {
             fireballCaught = value;
-        }
-    }
-    public int SpellQuantity
-    {
-        set
-        {
-            spellQuantity = value;
         }
     }
 }
