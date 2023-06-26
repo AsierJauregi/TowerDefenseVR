@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ExampleInputSystemScript : MonoBehaviour
+public class InputSystemScript : MonoBehaviour
 {
     
     [SerializeField] InputActionAsset myActions;
@@ -13,6 +13,7 @@ public class ExampleInputSystemScript : MonoBehaviour
     [SerializeField] InputActionReference letBuildReference;
     [SerializeField] InputActionReference endBuildingReference;
     [SerializeField] InputActionReference menuSelectionReference;
+    [SerializeField] InputActionReference holdingFireballReference;
 
     [Header ("Controllers")]
     [SerializeField] GameObject leftController;
@@ -97,7 +98,7 @@ public class ExampleInputSystemScript : MonoBehaviour
                 isBuilding = false;
                 leftController.GetComponent<TowerBuilder>().enabled = false;
                 gameInstance.SpendCoins(buildingCost);
-                rightController.GetComponentInChildren<RightControllerUIBehaviour>().EnableTowerCostText(false);
+                rightController.transform.parent.GetComponentInChildren<RightControllerUIBehaviour>().EnableTowerCostText(false);
                 radialMenu.SetActive(false);
             }
         }
@@ -117,7 +118,7 @@ public class ExampleInputSystemScript : MonoBehaviour
         {
             Debug.Log("Not building");
             isBuilding = false;
-            rightController.GetComponentInChildren<RightControllerUIBehaviour>().EnableTowerCostText(false);
+            rightController.transform.parent.GetComponentInChildren<RightControllerUIBehaviour>().EnableTowerCostText(false);
             radialMenu.SetActive(false);
             leftController.GetComponent<TowerBuilder>().StopPrevisualization();
             leftController.GetComponent<TowerBuilder>().enabled = false;
